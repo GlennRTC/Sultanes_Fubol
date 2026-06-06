@@ -14,7 +14,7 @@ Build the match calendar and quinielas prediction system. An authenticated user 
 ## Implementation Decisions
 
 ### Calendar Layout (CalendarPage `/calendario`)
-- **D-01:** Two views with a toggle — "Por fecha" (date-grouped scrollable list with date headers like "12 de junio") and "Por grupo" (tabbed A–H, each tab showing that group's 6 matches).
+- **D-01:** Two views with a toggle — "Por fecha" (date-grouped scrollable list with date headers like "12 de junio") and "Por grupo" (tabbed A–L, each tab showing that group's 6 matches). [Corrected from A–H: WC 2026 has 12 groups A–L, 72 total matches — research finding overrides pre-planning assumption]
 - **D-02:** Match card content: home team vs away team, match time in the user's local timezone, status badge (Programado / En vivo / Finalizado), and the actual score if the match is finished.
 - **D-03:** In the "Por fecha" view, two dropdowns at the top — "Grupo:" and "Equipo:". Each has a "Todos" option to reset. Selecting a group filters to matches from that group; selecting a team shows only that team's matches.
 - **D-04:** Match seed data is the real FIFA WC 2026 group-stage schedule (all 48 matches, real team names, UTC kickoff times). Built as `supabase/seed/matches_wc2026.sql`.
