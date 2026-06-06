@@ -16,7 +16,7 @@ Requirements for initial release. Each maps to a roadmap phase.
 
 ### Calendar (Calendario)
 
-- [ ] **CAL-01**: All 48 group stage matches are visible
+- [ ] **CAL-01**: All 72 group stage matches are visible (WC2026: 12 groups × 6 matches)
 - [ ] **CAL-02**: Match times are shown in the user's local timezone (auto-detected, manual override persists across sessions)
 - [ ] **CAL-03**: Matches are filterable by group and by team
 - [ ] **CAL-04**: Match status (scheduled / live / finished) is visible on each match card
