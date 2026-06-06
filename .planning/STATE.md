@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 2 planned — 4 plans ready to execute
-last_updated: "2026-06-06T03:36:11.143Z"
-last_activity: 2026-06-06 -- Phase 01 execution started
+last_updated: "2026-06-06T14:31:35.582Z"
+last_activity: 2026-06-06 -- Phase 02 execution started
 progress:
   total_phases: 4
   completed_phases: 1
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-04)
 
 **Core value:** A fully playable quinielas + apuestas experience live before the World Cup's first match kicks off on June 11, 2026.
-**Current focus:** Phase 01 — infrastructure-auth
+**Current focus:** Phase 02 — calendar-quinielas
 
 ## Current Position
 
-Phase: 01 (infrastructure-auth) — EXECUTING
-Plan: 1 of 3
-Status: Ready to execute
-Last activity: 2026-06-06 -- Phase 01 execution started
+Phase: 02 (calendar-quinielas) — EXECUTING
+Plan: 1 of 4
+Status: Executing Phase 02
+Last activity: 2026-06-06 -- Phase 02 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
