@@ -41,19 +41,36 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 ### Phase 2: Calendar + Quinielas
 
-**Goal:** An authenticated user can browse all 48 group-stage matches in their local timezone, submit a score prediction with token deduction, and see the global leaderboard update when a result is entered.
+**Goal:** An authenticated user can browse all 72 group-stage matches in their local timezone, submit a score prediction with token deduction, and see the global leaderboard update when a result is entered.
 **Mode:** mvp
 **Depends on:** Phase 1
 **Requirements:** CAL-01, CAL-02, CAL-03, CAL-04, QUI-01, QUI-02, QUI-03, QUI-04, QUI-05
 **Success Criteria** (what must be TRUE):
 
-  1. All 48 group-stage matches are visible on the CalendarPage, filterable by group and by team, each showing scheduled / live / finished status.
+  1. All 72 group-stage matches (groups A–L) are visible on the CalendarPage, filterable by group and by team, each showing scheduled / live / finished status.
   2. Match times display in the user's detected local timezone; changing the timezone preference persists across sessions.
   3. A user can submit a score prediction for a scheduled match; their token balance decreases immediately and the prediction is visible in their history.
   4. Predicting on a match that has already started or finished is blocked (form disabled or error shown in Spanish).
   5. After an admin enters a match result, the global leaderboard reflects updated points for all users who predicted correctly.
 
-**Plans:** TBD
+**Plans:** 4 plans
+
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Backend: migration 0002 (matches/predictions tables, RLS, leaderboard_view, place_prediction + calculate_prediction_points) + 72-match seed + types + authStore.updateTokens
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 02-02-PLAN.md — [BLOCKING] schema push: apply migration 0002 + load WC2026 seed to live Supabase
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 02-03-PLAN.md — Calendar + Quinielas slice: TimezonePicker + MatchCard + PredictionModal + CalendarPage (both views, filters, two-step prediction)
+
+**Wave 4** *(blocked on Wave 3)*
+
+- [ ] 02-04-PLAN.md — Wiring + Leaderboard slice: LeaderboardPage (/tabla) + App routes/redirects + Navbar links + auth redirect updates
+
 **UI hint:** yes
 
 ### Phase 3: Apuestas (Bet Pools)
@@ -95,6 +112,6 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
-| 2. Calendar + Quinielas | 0/TBD | Not started | - |
+| 2. Calendar + Quinielas | 0/4 | Not started | - |
 | 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
