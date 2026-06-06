@@ -22,8 +22,8 @@ export function LoginPage() {
   const location = useLocation();
   const { user } = useAuthStore();
 
-  // D-09: navigate to intended URL after login, default /bienvenido
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? '/bienvenido';
+  // D-09: navigate to intended URL after login, default /calendario
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? '/calendario';
 
   // Check if arriving from a completed password reset (D-04)
   const passwordReset = (location.state as { passwordReset?: boolean })?.passwordReset === true;
@@ -33,10 +33,10 @@ export function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // D-11: redirect authenticated users away from /login to /bienvenido (must be in useEffect, not inline)
+  // D-11: redirect authenticated users away from /login to /calendario (must be in useEffect, not inline)
   useEffect(() => {
     if (user) {
-      navigate('/bienvenido', { replace: true });
+      navigate('/calendario', { replace: true });
     }
   }, [user, navigate]);
 

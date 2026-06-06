@@ -8,7 +8,8 @@ import { FullScreenSpinner } from './components/FullScreenSpinner';
 import { LoginPage } from './pages/LoginPage';
 import { RegistroPage } from './pages/RegistroPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
-import { HomePage } from './pages/HomePage';
+import { CalendarPage } from './pages/CalendarPage';
+import { LeaderboardPage } from './pages/LeaderboardPage';
 
 export function App() {
   const { setUser, setProfile, setLoading, loading } = useAuthStore();
@@ -62,8 +63,10 @@ export function App() {
               </>
             }
           >
-            <Route path="/bienvenido" element={<HomePage />} />
-            <Route path="/" element={<Navigate to="/bienvenido" replace />} />
+            <Route path="/calendario" element={<CalendarPage />} />
+            <Route path="/tabla" element={<LeaderboardPage />} />
+            <Route path="/" element={<Navigate to="/calendario" replace />} />
+            <Route path="/bienvenido" element={<Navigate to="/calendario" replace />} />
           </Route>
         </Route>
       </Routes>

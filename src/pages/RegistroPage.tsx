@@ -40,10 +40,10 @@ export function RegistroPage() {
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // D-11: redirect authenticated users away from /registro to /bienvenido
+  // D-11: redirect authenticated users away from /registro to /calendario
   useEffect(() => {
     if (user) {
-      navigate('/bienvenido', { replace: true });
+      navigate('/calendario', { replace: true });
     }
   }, [user, navigate]);
 
