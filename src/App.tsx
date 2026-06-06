@@ -19,7 +19,7 @@ export function App() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         if (session?.user) {
-          setUser({ id: session.user.id, email: session.user.email! });
+          setUser({ id: session.user.id, email: session.user.email ?? '' });
           const { data } = await supabase
             .from('profiles')
             .select('*')
