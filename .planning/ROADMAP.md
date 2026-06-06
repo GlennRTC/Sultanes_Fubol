@@ -6,7 +6,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 ## Phases
 
-- [ ] **Phase 1: Infrastructure + Auth** - Supabase DB, Netlify deploy, login/register/logout/reset live on a public URL
+- [x] **Phase 1: Infrastructure + Auth** - Supabase DB, Netlify deploy, login/register/logout/reset live on a public URL (completed 2026-06-06)
 - [ ] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard
 - [ ] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout
 - [ ] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test
@@ -27,7 +27,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. The Supabase anti-pause ping Edge Function is deployed and a cron-job.org job calls it every 3 days.
   5. Supabase daily backups are confirmed enabled in the project settings.
 
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 **Wave 1**
 
 - [x] 01-01-PLAN.md — Walking Skeleton: scaffold + Supabase client + types + auth store + profiles migration/RLS + live-profile HomePage
@@ -35,7 +35,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 **Wave 2** *(blocked on Wave 1 completion)*
 
 - [x] 01-02-PLAN.md — Auth flows: ProtectedRoute + Navbar + login/registro/reset pages wired to Supabase Auth
-- [ ] 01-03-PLAN.md — Deployment: Netlify public URL + ping Edge Function + cron-job.org + backups
+- [x] 01-03-PLAN.md — Deployment: Netlify public URL + ping Edge Function + cron-job.org + backups
 
 **UI hint:** yes
 
@@ -94,7 +94,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure + Auth | 2/3 | In Progress|  |
+| 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
 | 2. Calendar + Quinielas | 0/TBD | Not started | - |
 | 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
