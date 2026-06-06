@@ -251,7 +251,19 @@ export function PredictionModal({
             <button
               type="button"
               disabled={homeScore === '' || awayScore === ''}
-              onClick={() => setStep('confirm')}
+              onClick={() => {
+                const h = parseInt(homeScore, 10);
+                const a = parseInt(awayScore, 10);
+                if (
+                  isNaN(h) || isNaN(a) ||
+                  h < 0 || a < 0 ||
+                  String(h) !== homeScore.trim() || String(a) !== awayScore.trim()
+                ) {
+                  setError('Ingresa números enteros válidos (0 o más).');
+                  return;
+                }
+                setStep('confirm');
+              }}
               className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
             >
               Confirmar predicción
@@ -262,7 +274,10 @@ export function PredictionModal({
         {/* Render mode (c): editable two-step — confirm step */}
         {!existingPrediction && !isLocked && step === 'confirm' && (
           <>
-            <p className="text-base text-slate-100 mb-4">
+            <p className="text-base text-slate-100 mb-2">
+              {match.home_team} <strong>{homeScore}</strong> – <strong>{awayScore}</strong> {match.away_team}
+            </p>
+            <p className="text-sm text-slate-400 mb-4">
               ¿Estás seguro? Esta predicción no se puede cambiar. Se descontarán 20 fichas.
             </p>
             <button
