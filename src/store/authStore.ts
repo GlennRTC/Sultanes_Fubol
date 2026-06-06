@@ -10,6 +10,7 @@ interface AuthState {
   setProfile: (profile: Profile | null) => void;
   setLoading: (loading: boolean) => void;
   signOut: () => Promise<void>;
+  updateTokens: (delta: number) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -23,4 +24,9 @@ export const useAuthStore = create<AuthState>((set) => ({
     await supabase.auth.signOut();
     set({ user: null, profile: null });
   },
+  updateTokens: (delta) => set((state) => ({
+    profile: state.profile
+      ? { ...state.profile, tokens: state.profile.tokens + delta }
+      : null,
+  })),
 }));
