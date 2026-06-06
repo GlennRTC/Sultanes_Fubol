@@ -97,11 +97,15 @@ export function RegistroPage() {
       });
 
     if (profileError) {
+      // Sign out to clear the orphaned auth session — the auth user still
+      // exists in auth.users but at least the next /registro attempt will
+      // fail at signUp rather than silently proceeding with no profile row.
+      await supabase.auth.signOut();
       if (profileError.code === '23505') {
         // PostgreSQL unique violation on username (D-06)
         setError('Este nombre de usuario ya está en uso. Elige otro.');
       } else {
-        setError('Algo salió mal. Intenta de nuevo.');
+        setError('Algo salió mal al crear tu perfil. Intenta de nuevo.');
       }
       setLoading(false);
       return;
