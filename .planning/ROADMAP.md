@@ -53,7 +53,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. Predicting on a match that has already started or finished is blocked (form disabled or error shown in Spanish).
   5. After an admin enters a match result, the global leaderboard reflects updated points for all users who predicted correctly.
 
-**Plans:** 2/4 plans executed
+**Plans:** 3/4 plans executed
 
 **Wave 1**
 
@@ -65,7 +65,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 3** *(blocked on Wave 2)*
 
-- [ ] 02-03-PLAN.md — Calendar + Quinielas slice: TimezonePicker + MatchCard + PredictionModal + CalendarPage (both views, filters, two-step prediction)
+- [x] 02-03-PLAN.md — Calendar + Quinielas slice: TimezonePicker + MatchCard + PredictionModal + CalendarPage (both views, filters, two-step prediction)
 
 **Wave 4** *(blocked on Wave 3)*
 
@@ -112,6 +112,6 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
-| 2. Calendar + Quinielas | 2/4 | In Progress|  |
+| 2. Calendar + Quinielas | 3/4 | In Progress|  |
 | 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
