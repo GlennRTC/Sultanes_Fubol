@@ -42,6 +42,7 @@ export function Navbar() {
         <span className="text-slate-100">{profile?.username}</span>
         <span className="text-green-400">Fichas: {profile?.tokens ?? 0}</span>
         <button
+          type="button"
           onClick={signOut}
           className="min-h-[44px] text-slate-300 hover:text-white bg-transparent border-none cursor-pointer"
         >
