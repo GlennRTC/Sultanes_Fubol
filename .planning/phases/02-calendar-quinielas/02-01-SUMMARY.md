@@ -132,3 +132,14 @@ None — no external service configuration required in this plan. Schema push ha
 ---
 *Phase: 02-calendar-quinielas*
 *Completed: 2026-06-06*
+
+## Self-Check: PASSED
+
+- supabase/migrations/0002_matches_predictions.sql: FOUND
+- supabase/seed/matches_wc2026.sql: FOUND
+- src/types/index.ts: FOUND
+- src/store/authStore.ts: FOUND
+- .planning/phases/02-calendar-quinielas/02-01-SUMMARY.md: FOUND
+- Commit b999366 (Task 1): FOUND
+- Commit 6c71630 (Task 2): FOUND
+- Commit de6b09f (Task 3): FOUND
