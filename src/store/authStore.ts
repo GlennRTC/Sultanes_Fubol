@@ -26,7 +26,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
   updateTokens: (delta) => set((state) => ({
     profile: state.profile
-      ? { ...state.profile, tokens: state.profile.tokens + delta }
+      ? { ...state.profile, tokens: Math.max(0, state.profile.tokens + delta) }
       : null,
   })),
 }));
