@@ -62,7 +62,7 @@ key-decisions:
   - "netlify.toml chosen as single SPA redirect source — no public/_redirects dual config"
   - "tsconfig.node.json composite:true required for TypeScript project references"
   - "src/vite-env.d.ts added to expose import.meta.env types (Vite requirement)"
-  - "Task 4 (db push) is blocking human-action checkpoint — migration written but not yet applied to live DB"
+  - "Task 4 (db push) complete — 0001_profiles.sql applied to live Supabase project pajowyfyvdscyqebbhkv"
 
 patterns-established:
   - "Supabase client singleton: import { supabase } from '../lib/supabase' — never call createClient outside this file"
@@ -87,7 +87,7 @@ completed: 2026-06-06
 - **Duration:** ~5 min
 - **Started:** 2026-06-06T00:03:24Z
 - **Completed:** 2026-06-06T00:07:43Z
-- **Tasks:** 3 of 4 auto tasks complete (Task 4 is a blocking human-action checkpoint)
+- **Tasks:** 4 of 4 complete (Task 4 confirmed by developer — supabase db push applied 0001_profiles.sql)
 - **Files modified:** 19
 
 ## Accomplishments
@@ -105,7 +105,7 @@ completed: 2026-06-06
 3. **Task 3: App router + onAuthStateChange + HomePage** - a3d9699 (feat)
 4. **chore: add /dist to .gitignore** - f2949d3 (chore — auto-fix Rule 2)
 
-Task 4 (db push): Not committed — blocking human-action checkpoint awaiting user to run supabase db push.
+Task 4 (db push): Confirmed complete — developer ran `supabase db push` and 0001_profiles.sql was applied to project pajowyfyvdscyqebbhkv.
 
 ## Files Created/Modified
 
@@ -173,16 +173,9 @@ Task 4 (db push): Not committed — blocking human-action checkpoint awaiting us
 
 None beyond the auto-fixed deviations above.
 
-## Pending: Task 4 (Blocking Checkpoint)
+## Task 4 Complete
 
-The profiles migration has been written at supabase/migrations/0001_profiles.sql but NOT yet pushed to the live Supabase database. Task 4 is a checkpoint:human-action that requires the developer to:
-
-1. Set SUPABASE_ACCESS_TOKEN and SUPABASE_DB_PASSWORD env vars
-2. Run: supabase link --project-ref <PROJECT_REF>
-3. Run: supabase db push
-4. Confirm in the Supabase Dashboard that profiles exists with 7 columns and RLS enabled
-
-Until this is done, the onAuthStateChange -> profiles read path cannot be verified end-to-end.
+Developer confirmed `supabase db push` applied 0001_profiles.sql to the live Supabase project (ref: pajowyfyvdscyqebbhkv). The profiles table with UNIQUE username constraint, tokens >= 0 CHECK, RLS enabled, and three owner-scoped policies is live.
 
 ## Next Phase Readiness
 
