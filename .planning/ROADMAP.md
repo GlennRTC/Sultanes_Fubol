@@ -7,7 +7,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 ## Phases
 
 - [x] **Phase 1: Infrastructure + Auth** - Supabase DB, Netlify deploy, login/register/logout/reset live on a public URL (completed 2026-06-06)
-- [ ] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard
+- [x] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard (completed 2026-06-06)
 - [ ] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout
 - [ ] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test
 
@@ -53,7 +53,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. Predicting on a match that has already started or finished is blocked (form disabled or error shown in Spanish).
   5. After an admin enters a match result, the global leaderboard reflects updated points for all users who predicted correctly.
 
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans complete
 
 **Wave 1**
 
@@ -69,7 +69,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 4** *(blocked on Wave 3)*
 
-- [ ] 02-04-PLAN.md — Wiring + Leaderboard slice: LeaderboardPage (/tabla) + App routes/redirects + Navbar links + auth redirect updates
+- [x] 02-04-PLAN.md — Wiring + Leaderboard slice: LeaderboardPage (/tabla) + App routes/redirects + Navbar links + auth redirect updates
 
 **UI hint:** yes
 
@@ -112,6 +112,6 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
-| 2. Calendar + Quinielas | 3/4 | In Progress|  |
+| 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
 | 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
