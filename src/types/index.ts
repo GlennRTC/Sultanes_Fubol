@@ -119,7 +119,12 @@ export type Database = {
         Relationships: [];
       };
     };
-    Functions: Record<string, never>;
+    Functions: {
+      place_prediction: {
+        Args: { p_match_id: string; p_home_score: number; p_away_score: number };
+        Returns: void;
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };
