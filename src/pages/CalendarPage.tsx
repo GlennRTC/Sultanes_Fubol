@@ -54,16 +54,23 @@ export function CalendarPage() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const [{ data: matchData, error: matchError }, { data: predData }] = await Promise.all([
+      const [
+        { data: matchData, error: matchError },
+        { data: predData, error: predError },
+      ] = await Promise.all([
         supabase.from('matches').select('*').order('match_datetime'),
         supabase.from('predictions').select('*'),
       ]);
       if (matchError) {
         setError('No se pudieron cargar los partidos. Recarga la página.');
-      } else {
-        setMatches(matchData ?? []);
-        setPredictions(predData ?? []);
+        setLoading(false);
+        return;
       }
+      setMatches(matchData ?? []);
+      if (predError) {
+        console.warn('predictions fetch failed:', predError.message);
+      }
+      setPredictions(predData ?? []);
       setLoading(false);
     }
     fetchData();
