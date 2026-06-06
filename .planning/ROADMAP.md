@@ -27,10 +27,10 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. The Supabase anti-pause ping Edge Function is deployed and a cron-job.org job calls it every 3 days.
   5. Supabase daily backups are confirmed enabled in the project settings.
 
-**Plans:** 3 plansPlans:
+**Plans:** 1/3 plans executed
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Walking Skeleton: scaffold + Supabase client + types + auth store + profiles migration/RLS + live-profile HomePage
+- [x] 01-01-PLAN.md — Walking Skeleton: scaffold + Supabase client + types + auth store + profiles migration/RLS + live-profile HomePage
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -94,7 +94,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure + Auth | 0/3 | Not started | - |
+| 1. Infrastructure + Auth | 1/3 | In Progress|  |
 | 2. Calendar + Quinielas | 0/TBD | Not started | - |
 | 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
