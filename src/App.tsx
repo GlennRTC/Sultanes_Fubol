@@ -10,6 +10,7 @@ import { RegistroPage } from './pages/RegistroPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { CalendarPage } from './pages/CalendarPage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
+import { ApuestasPage } from './pages/ApuestasPage';
 
 export function App() {
   const { setUser, setProfile, setLoading, loading } = useAuthStore();
@@ -65,6 +66,7 @@ export function App() {
           >
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/tabla" element={<LeaderboardPage />} />
+            <Route path="/apuestas" element={<ApuestasPage />} />
             <Route path="/" element={<Navigate to="/calendario" replace />} />
             <Route path="/bienvenido" element={<Navigate to="/calendario" replace />} />
           </Route>

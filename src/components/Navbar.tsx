@@ -26,6 +26,16 @@ export function Navbar() {
           Calendario
         </NavLink>
         <NavLink
+          to="/apuestas"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-sm text-green-400 px-3 py-1 rounded-lg min-h-[44px] flex items-center'
+              : 'text-sm text-slate-300 hover:text-white px-3 py-1 rounded-lg min-h-[44px] flex items-center'
+          }
+        >
+          Apuestas
+        </NavLink>
+        <NavLink
           to="/tabla"
           className={({ isActive }) =>
             isActive
