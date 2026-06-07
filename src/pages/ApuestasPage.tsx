@@ -39,7 +39,13 @@ export function ApuestasPage() {
       setPools((poolResult.data ?? []) as unknown as BetPool[]);
 
       if (betResult.error) {
-        console.warn('bets fetch failed:', betResult.error.message);
+        // Treat as non-recoverable: if bet history is missing, getBetForPool()
+        // returns undefined for every pool and BetModal opens in editable mode
+        // even for pools the user already bet on — the DB unique constraint would
+        // then reject the attempt with a confusing "Ya tienes una apuesta" error.
+        setError('No se pudo cargar tu historial de apuestas. Recarga la página.');
+        setLoading(false);
+        return;
       }
       setBets(betResult.data ?? []);
 
