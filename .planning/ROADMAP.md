@@ -87,7 +87,24 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. Every token movement (bet placed, winnings distributed, admin credit) appears as a record in token_transactions.
   5. When an admin resolves a pool, winners receive proportional tokens with no house cut; the user's bet history shows win/loss status and tokens won.
 
-**Plans:** TBD
+**Plans:** 4 plans
+
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — Backend: migration 0004 (bet_pools/pool_options/bets/token_transactions tables, RLS, place_bet + resolve_pool functions, pool_option_totals view, Realtime publication) + Phase 3 types
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 03-02-PLAN.md — [BLOCKING] schema push: apply migration 0004 to live Supabase + seed test pool + verify Realtime publication + verify resolve_pool not callable by authenticated
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 03-03-PLAN.md — Frontend slice: PoolCard + BetModal + ApuestasPage (parallel fetch, Realtime subscription, Activas/Cerradas sections, odds display, two-step bet modal)
+
+**Wave 4** *(blocked on Wave 3)*
+
+- [ ] 03-04-PLAN.md — Wiring: /apuestas protected route in App.tsx + Apuestas NavLink in Navbar.tsx + end-to-end smoke test
+
 **UI hint:** yes
 
 ### Phase 4: Admin Panel + QA + Production
@@ -113,5 +130,5 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 |-------|----------------|--------|-----------|
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
 | 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
-| 3. Apuestas (Bet Pools) | 0/TBD | Not started | - |
+| 3. Apuestas (Bet Pools) | 0/4 | Not started | - |
 | 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
