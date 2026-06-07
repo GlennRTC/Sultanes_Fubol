@@ -21,9 +21,18 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const { profile } = useAuthStore();
+
   const isOpen = pool.status === 'open';
   const amountNum = parseInt(amount, 10);
-  const canProceed = selectedOptionId !== '' && !isNaN(amountNum) && amountNum >= 10;
+  // Upper-bound guard: amount must not exceed user's current token balance (WR-02).
+  // Prevents cryptic DB error code 22003 (integer out of range) and naturally enforces
+  // "can't bet more than you have" at the UI layer before the RPC call.
+  const canProceed =
+    selectedOptionId !== '' &&
+    !isNaN(amountNum) &&
+    amountNum >= 10 &&
+    amountNum <= (profile?.tokens ?? 0);
 
   // Close on Escape key (accessibility — same as PredictionModal lines 38-44)
   useEffect(() => {
@@ -224,6 +233,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                     id="bet-amount"
                     type="number"
                     min="10"
+                    max={profile?.tokens ?? 0}
                     step="1"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
