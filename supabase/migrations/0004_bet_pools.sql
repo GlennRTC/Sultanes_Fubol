@@ -168,6 +168,13 @@ declare
   v_deadline    timestamptz;
   v_user_tokens integer;
 begin
+  -- 0. Guard: auth.uid() can return null in direct SQL Editor invocations or on
+  --    expired JWT edge cases — fail immediately rather than silently operating on
+  --    a null user_id (WR-04 defense-in-depth; primary mitigation is REVOKE from anon).
+  if v_user_id is null then
+    raise exception 'not_authenticated';
+  end if;
+
   -- 1. Validate pool exists
   select status, deadline
   into v_pool_status, v_deadline
@@ -255,37 +262,64 @@ security definer
 set search_path = public
 as $$
 declare
-  v_pool_total    integer;
-  v_winning_total integer;
-  v_bet           record;
-  v_payout        integer;
+  v_pool_total      integer;
+  v_winning_total   integer;
+  v_bet             record;
+  v_payout          integer;
+  v_current_status  text;
 begin
-  -- 1. Sum all tokens wagered in the pool
+  -- 0. Validate pool exists and is not already resolved (CR-01 idempotency guard).
+  --    Without this check, a second call re-runs the payout loop in full,
+  --    permanently inflating every winner's token balance.
+  select status into v_current_status
+  from public.bet_pools
+  where id = p_pool_id;
+
+  if not found then
+    raise exception 'pool_not_found';
+  end if;
+
+  if v_current_status = 'resolved' then
+    raise exception 'pool_already_resolved';
+  end if;
+
+  -- 1. Validate winning_option_id belongs to this pool before any writes (CR-02).
+  --    Without this check, an admin typo can permanently corrupt the pool row:
+  --    winning_option_id gets set to a wrong UUID, v_winning_total becomes 0,
+  --    the early-return fires, and all wagered tokens are silently destroyed.
+  if not exists (
+    select 1 from public.pool_options
+    where id = p_winning_option_id and pool_id = p_pool_id
+  ) then
+    raise exception 'option_not_in_pool';
+  end if;
+
+  -- 2. Sum all tokens wagered in the pool
   select coalesce(sum(tokens_wagered), 0)
   into v_pool_total
   from public.bets
   where pool_id = p_pool_id;
 
-  -- 2. Sum tokens wagered on the winning option
+  -- 3. Sum tokens wagered on the winning option
   select coalesce(sum(tokens_wagered), 0)
   into v_winning_total
   from public.bets
   where pool_id = p_pool_id and option_id = p_winning_option_id;
 
-  -- 3. Mark pool as resolved with winning option
+  -- 4. Mark pool as resolved with winning option
   update public.bet_pools
   set status            = 'resolved',
       winning_option_id = p_winning_option_id
   where id = p_pool_id;
 
-  -- 4. Guard: no payouts when zero bets on winning option (Pitfall 6).
+  -- 5. Guard: no payouts when zero bets on winning option (Pitfall 6).
   --    Losing tokens remain in economy. Admin should not select an option
   --    with no bets — Phase 4 admin UI will surface this.
   if v_winning_total = 0 then
     return;
   end if;
 
-  -- 5. Distribute tokens proportionally to winning bettors
+  -- 6. Distribute tokens proportionally to winning bettors
   --    Formula: FLOOR(user_wagered / winning_total * pool_total) — integer arithmetic (CLAUDE.md, D-12)
   for v_bet in
     select id, user_id, tokens_wagered
