@@ -191,7 +191,7 @@ export function CalendarPage() {
                 <select
                   value={filterGroup}
                   onChange={(e) => { setFilterGroup(e.target.value); setFilterTeam(''); }}
-                  className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="flex-1 min-w-[140px] bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
                   aria-label="Grupo:"
                 >
                   <option value="">Grupo: Todos</option>
@@ -202,7 +202,7 @@ export function CalendarPage() {
                 <select
                   value={filterTeam}
                   onChange={(e) => setFilterTeam(e.target.value)}
-                  className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="flex-1 min-w-[140px] bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
                   aria-label="Equipo:"
                 >
                   <option value="">Equipo: Todos</option>
