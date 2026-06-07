@@ -21,11 +21,20 @@ export function App() {
       async (_event, session) => {
         if (session?.user) {
           setUser({ id: session.user.id, email: session.user.email ?? '' });
-          const { data } = await supabase
+          const { data, error: profileError } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
+          if (profileError) {
+            // Profile fetch failed (RLS misconfiguration, network error, cold-start timeout).
+            // Sign out to avoid an authenticated-but-profileless state where Navbar shows
+            // empty username and ApuestasPage proceeds with a null profile in the store.
+            // The user will be redirected to /login and can retry immediately (WR-05).
+            console.error('Profile fetch failed:', profileError.message);
+            await supabase.auth.signOut();
+            return;
+          }
           setProfile(data);
         } else {
           setUser(null);
