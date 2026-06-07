@@ -22,7 +22,7 @@ export function ApuestasPage() {
     async function fetchData() {
       setLoading(true);
       const [poolResult, betResult, totalsResult] = await Promise.all([
-        supabase.from('bet_pools').select('*, pool_options(*)').order('deadline'),
+        supabase.from('bet_pools').select('*, pool_options!pool_options_pool_id_fkey(*)').order('deadline'),
         supabase.from('bets').select('*').eq('user_id', user!.id),
         supabase.from('pool_option_totals').select('*'),
       ]);
