@@ -1,25 +1,13 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import { es } from 'date-fns/locale';
-import type { BetPool, PoolOption, Bet } from '../types/index';
+import { calcOdds } from '../lib/calcOdds';
+import type { BetPool, Bet } from '../types/index';
 
 interface PoolCardProps {
   pool: BetPool;
   userBet?: Bet;
   betTotals: Record<string, number>;
   onOpen: (pool: BetPool) => void;
-}
-
-// Division-by-zero guard: returns null for all options when poolTotal === 0 (Pitfall 4)
-function calcOdds(
-  _poolId: string,
-  options: PoolOption[],
-  betTotals: Record<string, number>
-): Record<string, number | null> {
-  const poolTotal = options.reduce((sum, opt) => sum + (betTotals[opt.id] ?? 0), 0);
-  if (poolTotal === 0) return Object.fromEntries(options.map((o) => [o.id, null]));
-  return Object.fromEntries(
-    options.map((o) => [o.id, Math.round(((betTotals[o.id] ?? 0) / poolTotal) * 100)])
-  );
 }
 
 function statusBadge(status: 'open' | 'closed' | 'resolved'): JSX.Element {
@@ -47,7 +35,7 @@ function statusBadge(status: 'open' | 'closed' | 'resolved'): JSX.Element {
 export function PoolCard({ pool, userBet, betTotals, onOpen }: PoolCardProps) {
   const tz = localStorage.getItem('fubol_timezone') ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   const sortedOptions = [...(pool.pool_options ?? [])].sort((a, b) => a.position - b.position);
-  const oddsMap = calcOdds(pool.id, sortedOptions, betTotals);
+  const oddsMap = calcOdds(sortedOptions, betTotals);
 
   return (
     <div

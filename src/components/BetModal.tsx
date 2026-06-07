@@ -3,6 +3,7 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { es } from 'date-fns/locale';
 import { supabase } from '../lib/supabase';
 import { useAuthStore } from '../store/authStore';
+import { calcOdds } from '../lib/calcOdds';
 import type { BetPool, Bet } from '../types/index';
 
 interface BetModalProps {
@@ -11,19 +12,6 @@ interface BetModalProps {
   betTotals: Record<string, number>;
   onClose: () => void;
   onSuccess: (bet: { optionId: string; amount: number }) => void;
-}
-
-// Inline parimutuel odds (same logic as PoolCard.calcOdds)
-function calcOddsInline(
-  options: BetPool['pool_options'],
-  betTotals: Record<string, number>
-): Record<string, number | null> {
-  const opts = options ?? [];
-  const poolTotal = opts.reduce((sum, opt) => sum + (betTotals[opt.id] ?? 0), 0);
-  if (poolTotal === 0) return Object.fromEntries(opts.map((o) => [o.id, null]));
-  return Object.fromEntries(
-    opts.map((o) => [o.id, Math.round(((betTotals[o.id] ?? 0) / poolTotal) * 100)])
-  );
 }
 
 export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetModalProps) {
@@ -50,7 +38,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
   const headingId = 'bet-modal-' + pool.id;
 
   const sortedOptions = [...(pool.pool_options ?? [])].sort((a, b) => a.position - b.position);
-  const oddsMap = calcOddsInline(pool.pool_options, betTotals);
+  const oddsMap = calcOdds(pool.pool_options ?? [], betTotals);
 
   async function handleConfirm() {
     setLoading(true);
