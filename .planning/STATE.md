@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 planned — 4 plans ready to execute
-last_updated: "2026-06-06T14:31:35.582Z"
-last_activity: 2026-06-06 -- Phase 02 execution started
+stopped_at: Phase 2 UAT complete — all 5 tests passed
+last_updated: "2026-06-06T00:00:00Z"
+last_activity: 2026-06-06 -- Phase 02 UAT complete (5/5 passed)
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 7
-  completed_plans: 3
-  percent: 25
+  completed_plans: 7
+  percent: 50
 ---
 
 # FUBOL — Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-04)
 
 **Core value:** A fully playable quinielas + apuestas experience live before the World Cup's first match kicks off on June 11, 2026.
-**Current focus:** Phase 02 — calendar-quinielas
+**Current focus:** Phase 03 — apuestas (bet pools)
 
 ## Current Position
 
-Phase: 02 (calendar-quinielas) — EXECUTING
-Plan: 1 of 4
-Status: Executing Phase 02
-Last activity: 2026-06-06 -- Phase 02 execution started
+Phase: 02 (calendar-quinielas) — COMPLETE
+Next: Phase 03 — apuestas (bet pools)
+Status: Ready for Phase 03 planning
+Last activity: 2026-06-06 -- Phase 02 UAT complete (5/5 passed)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 

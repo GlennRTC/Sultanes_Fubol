@@ -1,61 +1,73 @@
 ---
-status: testing
+status: complete
 phase: 02-calendar-quinielas
-source: [02-VERIFICATION.md]
+source: [02-01-SUMMARY.md, 02-02-SUMMARY.md, 02-03-SUMMARY.md, 02-04-SUMMARY.md]
 started: 2026-06-06T00:00:00Z
 updated: 2026-06-06T00:00:00Z
 ---
 
 # Phase 02 UAT — Calendar + Quinielas
 
-All code checks pass. The following 5 items require live browser + Supabase verification before the phase can be marked complete.
+## Current Test
 
-**Pre-requisite before items 4–5:** Push the fixes migration first:
-```bash
-supabase db push   # applies 0003_phase02_fixes.sql to pajowyfyvdscyqebbhkv
-```
+## Current Test
 
----
+[testing complete]
 
-## UAT Checklist
+## Tests
 
-### UAT-02-01: Live DB state (Plan 02-02 gate)
-- [ ] `select count(*) from public.matches;` returns **72**
-- [ ] `select count(distinct group_name) from public.matches;` returns **12**
-- [ ] `place_prediction` and `calculate_prediction_points` visible in Database → Functions
-- [ ] `0003_phase02_fixes.sql` pushed: `leaderboard_view` uses `security_invoker = false` (all users visible)
+### 1. Live DB State
+expected: |
+  supabase db push applies 0003_phase02_fixes.sql.
+  Then in Supabase SQL Editor:
+  - select count(*) from public.matches; → 72
+  - select count(distinct group_name) from public.matches; → 12
+  - place_prediction and calculate_prediction_points appear in Database → Functions
+  - leaderboard_view definition shows security_invoker = false (not the default SECURITY INVOKER)
+result: pass
 
-### UAT-02-02: Calendar browsing + timezone switching
-- [ ] `/calendario` shows 72 matches
-- [ ] Por fecha and Por grupo views both work; 12 group tabs A–L present
-- [ ] Groups I–L show Argentina, Francia, Portugal, Inglaterra
-- [ ] Click "Cambiar", pick "Argentina / Uruguay", times shift; persists after page refresh
-- [ ] Grupo and Equipo dropdowns filter correctly; "Todos" resets the list
+### 2. Calendar Browsing + Timezone Switching
+expected: |
+  - /calendario loads and shows 72 match cards
+  - "Por fecha" and "Por grupo" toggle both work
+  - "Por grupo" shows 12 group tabs labeled A through L
+  - Groups I–L contain Argentina, Francia, Portugal, and Inglaterra respectively
+  - Clicking "Cambiar" opens TimezonePicker; selecting "Argentina / Uruguay (UTC-3)" shifts all match times; refreshing the page keeps the new timezone
+  - Grupo and Equipo dropdowns filter the list; selecting "Todos" resets to all matches
+result: pass
 
-### UAT-02-03: Prediction flow end-to-end
-- [ ] Entering a decimal (e.g. "2.5") is rejected with "Ingresa números enteros válidos"
-- [ ] Valid integer scores advance to the confirm step showing the entered scoreline
-- [ ] Confirmar closes the modal and shows "Tu predicción: N-N" badge on the card
-- [ ] Navbar Fichas counter drops by 20 immediately
-- [ ] Reopening that match card shows read-only mode with submitted scores
+### 3. Prediction Flow End-to-End
+expected: |
+  - Clicking a scheduled match opens PredictionModal
+  - Typing "2.5" in a score field and clicking Confirmar predicción shows the error "Ingresa números enteros válidos (0 o más)." — no step advance
+  - With valid integers (e.g. 2 and 1), clicking Confirmar predicción shows the confirm step with the scoreline displayed (e.g. "México 2 – 1 Ecuador")
+  - Clicking Confirmar on the confirm step closes the modal and shows a green "Tu predicción: 2-1" badge on the match card
+  - The Fichas counter in the Navbar drops by 20 immediately (no page reload needed)
+  - Clicking the same match card again opens a read-only modal showing the submitted scores
+result: pass
 
-### UAT-02-04: Locked and already-predicted modal modes
-- [ ] Clicking a live/finished match shows "Este partido ya comenzó — no se aceptan predicciones." with disabled inputs
-- [ ] Clicking a match with an existing prediction shows read-only prefilled inputs
+### 4. Locked and Already-Predicted Modal Modes
+expected: |
+  - Clicking a match with status "en_vivo" or "finalizado" opens the modal with the message "Este partido ya comenzó — no se aceptan predicciones." and score inputs are disabled/absent
+  - Clicking a match that already has a submitted prediction opens a read-only modal prefilled with those scores (not an editable form)
+result: pass
 
-### UAT-02-05: Leaderboard cross-user visibility + scoring
-- [ ] `/tabla` shows all registered users (not filtered to own row)
-- [ ] Network response contains only `id, username, tokens, leaderboard_points` — no `is_admin`/`is_blocked`/`email`
-- [ ] After `select calculate_prediction_points('<match_id>', <home>, <away>)` in Supabase SQL editor, `/tabla` shows 3 pts for exact match and own row is highlighted
+### 5. Leaderboard Cross-User Visibility + Scoring
+expected: |
+  - /tabla shows all registered users (not just the logged-in user's own row)
+  - Checking the network response for the leaderboard_view query: fields present are id, username, tokens, leaderboard_points only — is_admin, is_blocked, email are absent
+  - After running select calculate_prediction_points('<match_id>', <home_score>, <away_score>); in Supabase SQL Editor for an exact prediction match, /tabla shows 3 points for that user
+  - The logged-in user's own row has a visible highlight (green background or border) in the leaderboard
+result: pass
 
----
+## Summary
+
+total: 5
+passed: 5
+issues: 0
+pending: 0
+skipped: 0
 
 ## Gaps
 
-| ID | Description | Status |
-|----|-------------|--------|
-| — | None — all must_haves verified in code | — |
-
-## Documentation Fix Needed
-
-REQUIREMENTS.md `CAL-01` reads "All **48** group stage matches are visible" — WC2026 has 72 group-stage matches (12 groups × 6). The implementation is correct; the requirements doc needs updating.
+[none yet]
