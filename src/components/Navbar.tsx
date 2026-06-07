@@ -3,7 +3,7 @@ import { useAuthStore } from '../store/authStore';
 
 // Authenticated top navigation bar (D-12, D-13)
 // Height: 56px (h-14), bg-slate-800, border-b border-slate-700
-// Left: "FUBOL" display text
+// Left: "Sultanes Del FUBOL" display text
 // Right: username + "Fichas: [n]" + "Cerrar sesión" button
 export function Navbar() {
   const { profile, signOut } = useAuthStore();
@@ -11,7 +11,12 @@ export function Navbar() {
   return (
     <nav className="h-14 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-4">
       {/* Left: brand */}
-      <span className="text-2xl font-bold text-white">FUBOL</span>
+      <span
+        className="text-3xl text-white tracking-wide"
+        style={{ fontFamily: "'Bangers', cursive" }}
+      >
+        Sultanes Del FUBOL
+      </span>
 
       {/* Center: nav links */}
       <div className="flex items-center gap-2">
