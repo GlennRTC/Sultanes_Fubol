@@ -45,6 +45,7 @@ export type Database = {
           status: 'scheduled' | 'live' | 'finished';
           home_score: number | null;
           away_score: number | null;
+          venue: string | null;
           created_at: string;
         };
         Insert: {
@@ -56,6 +57,7 @@ export type Database = {
           status?: 'scheduled' | 'live' | 'finished';
           home_score?: number | null;
           away_score?: number | null;
+          venue?: string | null;
           created_at?: string;
         };
         Update: {
@@ -67,6 +69,7 @@ export type Database = {
           status?: 'scheduled' | 'live' | 'finished';
           home_score?: number | null;
           away_score?: number | null;
+          venue?: string | null;
           created_at?: string;
         };
         Relationships: [];
@@ -277,6 +280,7 @@ export interface Match {
   status: 'scheduled' | 'live' | 'finished';
   home_score: number | null;
   away_score: number | null;
+  venue: string | null;
 }
 
 export interface Prediction {
