@@ -5,3 +5,17 @@
 body {
   @apply bg-slate-900 text-slate-100;
 }
+
+/* Captain Tsubasa brand glow — applied to the hero title on the login page */
+.brand-glow {
+  text-shadow:
+    0 0 12px rgba(74, 222, 128, 0.5),
+    0 0 40px rgba(74, 222, 128, 0.2);
+}
+
+/* Login page background: subtle green radial bloom at the top */
+.login-bg {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(74, 222, 128, 0.07) 0%, transparent 65%),
+    #0f172a;
+}
