@@ -123,6 +123,7 @@ export function ApuestasPage() {
 
   return (
     <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+      <div className="max-w-3xl mx-auto">
       <h1 className="text-xl font-bold text-slate-100 mb-4">Apuestas</h1>
 
       {loading && <FullScreenSpinner />}
@@ -179,6 +180,8 @@ export function ApuestasPage() {
           )}
         </>
       )}
+
+      </div>{/* end max-w-3xl */}
 
       {/* Bet modal */}
       {selectedPool && (

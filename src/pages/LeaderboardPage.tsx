@@ -33,6 +33,7 @@ export function LeaderboardPage() {
 
   return (
     <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+      <div className="max-w-3xl mx-auto">
       <h1 className="text-xl font-bold text-slate-100 mb-4">Tabla de posiciones</h1>
 
       {/* Error banner */}
@@ -99,6 +100,7 @@ export function LeaderboardPage() {
           )}
         </>
       )}
+      </div>{/* end max-w-3xl */}
     </div>
   );
 }

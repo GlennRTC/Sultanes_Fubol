@@ -115,6 +115,7 @@ export function CalendarPage() {
 
   return (
     <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+      <div className="max-w-3xl mx-auto">
       <h1 className="text-xl font-bold text-slate-100 mb-4">Calendario</h1>
 
       {/* Timezone bar (D-14, D-15) */}
@@ -278,6 +279,8 @@ export function CalendarPage() {
           )}
         </>
       )}
+
+      </div>{/* end max-w-3xl */}
 
       {/* Prediction modal (D-05) */}
       {selectedMatch && (
