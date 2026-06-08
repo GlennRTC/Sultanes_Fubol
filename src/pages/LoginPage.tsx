@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Volleyball, Target, Coins, Trophy, Info } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuthStore } from '../store/authStore';
 
@@ -18,17 +19,17 @@ function mapError(msg: string): string {
 
 const features = [
   {
-    icon: '🎯',
+    icon: Target,
     title: 'Predice marcadores',
     desc: 'Adivina el resultado exacto de cada partido antes del pitazo. ¡Cada acierto suma puntos y llena tu billetera de fichas!',
   },
   {
-    icon: '🎰',
+    icon: Coins,
     title: 'Apuestas parimutuel',
     desc: 'Elige al ganador en los pools de apuestas. Si aciertas, te repartes las fichas de todos los que se equivocaron.',
   },
   {
-    icon: '🏆',
+    icon: Trophy,
     title: 'Escala la tabla',
     desc: 'Acumula puntos y fichas para coronarte Sultán del Fútbol entre tus cuates. ¡El que más sabe, más gana!',
   },
@@ -70,16 +71,19 @@ export function LoginPage() {
     <div className="login-bg min-h-screen flex flex-col items-center justify-center px-4 py-10">
       <div className="w-full max-w-5xl flex flex-col lg:flex-row gap-8 lg:gap-14 lg:items-center">
 
-        {/* ── Left column: hero + form ── */}
+        {/* ── Left: hero + form ── */}
         <div className="w-full lg:max-w-[420px] flex flex-col gap-6">
 
           {/* Hero brand */}
           <div className="text-center animate-fade-down">
-            <span className="text-5xl inline-block animate-float select-none" aria-hidden="true">
-              ⚽
-            </span>
+            <Volleyball
+              className="inline-block animate-float text-green-400 mb-2"
+              size={52}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
             <h1
-              className="text-5xl lg:text-6xl text-white tracking-wide leading-tight brand-glow mt-1"
+              className="text-5xl lg:text-6xl text-white tracking-wide leading-tight brand-glow"
               style={{ fontFamily: "'Bangers', cursive" }}
             >
               Sultanes Del FUBOL
@@ -89,7 +93,7 @@ export function LoginPage() {
             </p>
           </div>
 
-          {/* Login form card */}
+          {/* Login form */}
           <div className="bg-slate-800 border border-slate-700 rounded-xl p-7 animate-fade-up">
             <h2 className="text-lg font-bold text-slate-100 mb-5">Iniciar sesión</h2>
 
@@ -166,12 +170,12 @@ export function LoginPage() {
           </div>
         </div>
 
-        {/* ── Right column: info card ── */}
+        {/* ── Right: info card ── */}
         <div className="w-full lg:flex-1 animate-fade-up-delay">
           <div className="bg-slate-800/70 border border-green-500/25 rounded-2xl p-7 lg:p-9">
 
             <div className="flex items-center gap-3 mb-2">
-              <span className="text-3xl" aria-hidden="true">🏆</span>
+              <Trophy size={24} className="text-green-400 shrink-0" strokeWidth={1.5} aria-hidden="true" />
               <h2 className="text-xl font-bold text-white">Tu quiniela del Mundial 2026</h2>
             </div>
 
@@ -182,27 +186,31 @@ export function LoginPage() {
             </p>
 
             <ul className="flex flex-col gap-5 mb-7">
-              {features.map((f) => (
-                <li key={f.title} className="flex gap-4">
-                  <span className="text-2xl shrink-0 mt-0.5" aria-hidden="true">{f.icon}</span>
+              {features.map(({ icon: Icon, title, desc }) => (
+                <li key={title} className="flex gap-4">
+                  <Icon
+                    size={22}
+                    className="text-green-400 shrink-0 mt-0.5"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
                   <div>
-                    <p className="text-slate-100 font-semibold text-sm mb-0.5">{f.title}</p>
-                    <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
+                    <p className="text-slate-100 font-semibold text-sm mb-0.5">{title}</p>
+                    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
 
-            <div className="border-t border-slate-700 pt-5">
+            <div className="border-t border-slate-700 pt-5 flex gap-3">
+              <Info size={16} className="text-slate-500 shrink-0 mt-0.5" strokeWidth={1.5} aria-hidden="true" />
               <p className="text-slate-400 text-xs leading-relaxed">
-                💡{' '}
-                <span className="text-slate-300">
-                  El admin reparte fichas al inicio de la competencia.
-                </span>{' '}
+                <span className="text-slate-300">El admin reparte fichas al inicio de la competencia.</span>{' '}
                 Adminístralas bien — son tu munición para todo el torneo.{' '}
-                <span className="text-green-400 font-medium">¡Que empiece el Mundial! 🔥</span>
+                <span className="text-green-400 font-medium">¡Que empiece el Mundial!</span>
               </p>
             </div>
+
           </div>
         </div>
 
