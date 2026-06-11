@@ -211,7 +211,7 @@ export function AdminPoolsPage() {
                     type="button"
                     onClick={() => removeOption(i)}
                     aria-label="Eliminar opción"
-                    className="text-red-400 hover:text-red-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    className="text-red-400 hover:text-red-300 min-h-[44px] min-w-[44px] shrink-0 flex items-center justify-center"
                   >
                     <Trash2 size={16} />
                   </button>

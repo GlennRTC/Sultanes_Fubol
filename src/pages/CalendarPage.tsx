@@ -252,7 +252,7 @@ export function CalendarPage() {
                     key={g}
                     type="button"
                     onClick={() => setActiveGroup(g)}
-                    className={`px-4 py-2 rounded-lg text-sm min-h-[44px] whitespace-nowrap ${
+                    className={`px-4 py-2 rounded-lg text-sm min-h-[44px] whitespace-nowrap shrink-0 ${
                       activeGroup === g
                         ? 'bg-slate-700 text-slate-100 font-bold'
                         : 'bg-transparent text-slate-400 hover:text-slate-100'
