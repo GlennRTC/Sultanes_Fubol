@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { supabase } from './lib/supabase';
 import { useAuthStore } from './store/authStore';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { AdminRoute } from './components/AdminRoute';
 import { Navbar } from './components/Navbar';
 import { FullScreenSpinner } from './components/FullScreenSpinner';
 import { LoginPage } from './pages/LoginPage';
@@ -11,6 +12,10 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { CalendarPage } from './pages/CalendarPage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { ApuestasPage } from './pages/ApuestasPage';
+import { AdminUsersPage } from './pages/AdminUsersPage';
+import { AdminMatchesPage } from './pages/AdminMatchesPage';
+import { AdminPoolsPage } from './pages/AdminPoolsPage';
+import { AdminReportsPage } from './pages/AdminReportsPage';
 
 export function App() {
   const { setUser, setProfile, setLoading, loading } = useAuthStore();
@@ -83,6 +88,12 @@ export function App() {
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/tabla" element={<LeaderboardPage />} />
             <Route path="/apuestas" element={<ApuestasPage />} />
+            <Route element={<AdminRoute />}>
+              <Route path="/admin/usuarios" element={<AdminUsersPage />} />
+              <Route path="/admin/partidos" element={<AdminMatchesPage />} />
+              <Route path="/admin/apuestas" element={<AdminPoolsPage />} />
+              <Route path="/admin/reportes" element={<AdminReportsPage />} />
+            </Route>
             <Route path="/" element={<Navigate to="/calendario" replace />} />
             <Route path="/bienvenido" element={<Navigate to="/calendario" replace />} />
           </Route>

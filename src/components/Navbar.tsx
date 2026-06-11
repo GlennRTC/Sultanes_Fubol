@@ -33,6 +33,9 @@ export function Navbar() {
           <NavLink to="/calendario" className={desktopLinkClass}>Calendario</NavLink>
           <NavLink to="/apuestas" className={desktopLinkClass}>Apuestas</NavLink>
           <NavLink to="/tabla" className={desktopLinkClass}>Tabla</NavLink>
+          {profile?.is_admin && (
+            <NavLink to="/admin/usuarios" className={desktopLinkClass}>Admin</NavLink>
+          )}
         </div>
 
         {/* Desktop: user info — hidden below md */}
@@ -80,6 +83,15 @@ export function Navbar() {
           <NavLink to="/tabla" className={mobileLinkClass} onClick={() => setMenuOpen(false)}>
             Tabla
           </NavLink>
+          {profile?.is_admin && (
+            <NavLink
+              to="/admin/usuarios"
+              className={mobileLinkClass}
+              onClick={() => setMenuOpen(false)}
+            >
+              Admin
+            </NavLink>
+          )}
           <div className="flex items-center justify-between pt-3">
             <span className="text-sm text-slate-400">{profile?.username}</span>
             <button
