@@ -8,7 +8,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 - [x] **Phase 1: Infrastructure + Auth** - Supabase DB, Netlify deploy, login/register/logout/reset live on a public URL (completed 2026-06-06)
 - [x] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard (completed 2026-06-06)
-- [ ] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout
+- [x] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout (completed 2026-06-11)
 - [ ] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test
 
 ## Phase Details
@@ -87,7 +87,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. Every token movement (bet placed, winnings distributed, admin credit) appears as a record in token_transactions.
   5. When an admin resolves a pool, winners receive proportional tokens with no house cut; the user's bet history shows win/loss status and tokens won.
 
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans complete
 
 **Wave 1**
 
@@ -95,7 +95,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 2** *(blocked on Wave 1)*
 
-- [ ] 03-02-PLAN.md — [BLOCKING] schema push: apply migration 0004 to live Supabase + seed test pool + verify Realtime publication + verify resolve_pool not callable by authenticated
+- [x] 03-02-PLAN.md — [BLOCKING] schema push: apply migration 0004 to live Supabase + seed test pool + verify Realtime publication + verify resolve_pool not callable by authenticated
 
 **Wave 3** *(blocked on Wave 2)*
 
@@ -103,7 +103,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 4** *(blocked on Wave 3)*
 
-- [ ] 03-04-PLAN.md — Wiring: /apuestas protected route in App.tsx + Apuestas NavLink in Navbar.tsx + end-to-end smoke test
+- [x] 03-04-PLAN.md — Wiring: /apuestas protected route in App.tsx + Apuestas NavLink in Navbar.tsx + end-to-end smoke test
 
 **UI hint:** yes
 
@@ -112,7 +112,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 **Goal:** All admin operations (user management, match results, pool resolution, token grants, reports) work through a protected admin UI, the app passes mobile QA at 375px, and every row-level security policy is verified.
 **Mode:** mvp
 **Depends on:** Phase 3
-**Requirements:** ADM-01, ADM-02, ADM-03, ADM-04, ADM-05, ADM-06, ADM-07, ADM-08, INF-04
+**Requirements:** ADM-01, ADM-02, ADM-03, ADM-04, ADM-05, ADM-06, ADM-07, ADM-08, INF-03, INF-04
 **Success Criteria** (what must be TRUE):
 
   1. An admin can list, search, block, unblock, and force-reset the password of any user from the AdminUsersPage — and the action is logged to admin_logs.
@@ -121,7 +121,28 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   4. The app is fully usable on a 375px viewport in both iOS Safari and Android Chrome — no horizontal scroll, no overlapping tap targets.
   5. An RLS security audit confirms no cross-user data exposure: a logged-in user cannot read or write another user's predictions, bets, or token balance.
 
-**Plans:** TBD
+**Plans:** 5 plans
+
+**Wave 1**
+
+- [x] 04-01-PLAN.md — Backend foundation: migration 0007 (private schema, private.is_admin() helper, admin_logs table + RLS, 2 new RLS policies on profiles + token_transactions, 5 admin SECURITY DEFINER functions) + AdminLog type
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 04-02-PLAN.md — [BLOCKING] schema push: apply migration 0007 to live Supabase + verify all functions, policies, and security rejection for non-admins
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 04-03-PLAN.md — Admin UI core: AdminRoute + App.tsx routing + Navbar admin link + AdminUsersPage + AdminMatchesPage + admin-reset-password Edge Function
+
+**Wave 4** *(blocked on Wave 3)*
+
+- [ ] 04-04-PLAN.md — Admin UI pools + reports: AdminPoolsPage (create + resolve) + AdminReportsPage (token stats + leaderboard)
+
+**Wave 5** *(blocked on Wave 4)*
+
+- [ ] 04-05-PLAN.md — Mobile QA + RLS audit + E2E smoke test + Edge Function deploy + human approval
+
 **UI hint:** yes
 
 ## Progress
@@ -130,5 +151,5 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 |-------|----------------|--------|-----------|
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
 | 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
-| 3. Apuestas (Bet Pools) | 3/4 | In Progress|  |
-| 4. Admin Panel + QA + Production | 0/TBD | Not started | - |
+| 3. Apuestas (Bet Pools) | 4/4 | Complete   | 2026-06-11 |
+| 4. Admin Panel + QA + Production | 1/5 | In Progress | - |
