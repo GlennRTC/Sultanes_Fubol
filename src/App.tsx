@@ -27,10 +27,17 @@ export function App() {
             .eq('id', session.user.id)
             .single();
           if (profileError) {
-            // Profile fetch failed (RLS misconfiguration, network error, cold-start timeout).
-            // Sign out to avoid an authenticated-but-profileless state where Navbar shows
-            // empty username and ApuestasPage proceeds with a null profile in the store.
-            // The user will be redirected to /login and can retry immediately (WR-05).
+            if (profileError.code === 'PGRST116') {
+              // No profile row found — either the INSERT in RegistroPage hasn't run yet
+              // (race condition during signup) or the account is orphaned. Do NOT sign out:
+              // signing out would clear auth.uid() and cause the pending INSERT to fail,
+              // creating an account that can never log in. Set loading so the spinner clears;
+              // ProtectedRoute shows a friendly error for truly orphaned accounts.
+              setLoading(false);
+              return;
+            }
+            // Real error (network, RLS misconfiguration, etc.) — sign out to avoid a
+            // broken authenticated state.
             console.error('Profile fetch failed:', profileError.message);
             await supabase.auth.signOut();
             return;

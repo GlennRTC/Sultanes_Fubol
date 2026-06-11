@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuthStore } from '../store/authStore';
-
 // Username validation constants (D-05, D-08)
 const USERNAME_REGEX = /^[a-zA-Z0-9_]+$/;
 const USERNAME_MIN = 3;
@@ -30,7 +29,7 @@ function validatePassword(value: string): string {
 
 export function RegistroPage() {
   const navigate = useNavigate();
-  const { user } = useAuthStore();
+  const { user, setProfile } = useAuthStore();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -40,15 +39,17 @@ export function RegistroPage() {
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // D-11: redirect authenticated users away from /registro to /calendario
+  // D-11: redirect already-authenticated users away from /registro to /calendario.
+  // Guard with !loading so we don't redirect mid-registration: signUp auto-signs in the
+  // user (when email confirmation is OFF), which sets `user` before the profile INSERT runs.
   useEffect(() => {
-    if (user) {
+    if (user && !loading) {
       navigate('/calendario', { replace: true });
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
-  // Render nothing during redirect
-  if (user) return null;
+  // Render nothing during redirect — but only when not mid-registration (loading=true).
+  if (user && !loading) return null;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -111,8 +112,17 @@ export function RegistroPage() {
       return;
     }
 
-    // Success: navigate to /login (no auto-login)
-    navigate('/login');
+    // Fetch the newly-created profile and hydrate the store so ProtectedRoute sees it.
+    // The user is already signed in (signUp auto-signed them in), so this SELECT
+    // will satisfy the RLS `auth.uid() = id` policy.
+    const { data: profileData } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', data.user.id)
+      .single();
+    if (profileData) setProfile(profileData);
+
+    navigate('/calendario', { replace: true });
   }
 
   return (
