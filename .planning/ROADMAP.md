@@ -9,7 +9,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 - [x] **Phase 1: Infrastructure + Auth** - Supabase DB, Netlify deploy, login/register/logout/reset live on a public URL (completed 2026-06-06)
 - [x] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard (completed 2026-06-06)
 - [x] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout (completed 2026-06-11)
-- [ ] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test
+- [x] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test (completed 2026-06-11)
 
 ## Phase Details
 
@@ -129,19 +129,19 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 2** *(blocked on Wave 1)*
 
-- [ ] 04-02-PLAN.md — [BLOCKING] schema push: apply migration 0007 to live Supabase + verify all functions, policies, and security rejection for non-admins
+- [x] 04-02-PLAN.md — [BLOCKING] schema push: apply migration 0007 to live Supabase + verify all functions, policies, and security rejection for non-admins
 
 **Wave 3** *(blocked on Wave 2)*
 
-- [ ] 04-03-PLAN.md — Admin UI core: AdminRoute + App.tsx routing + Navbar admin link + AdminUsersPage + AdminMatchesPage + admin-reset-password Edge Function
+- [x] 04-03-PLAN.md — Admin UI core: AdminRoute + App.tsx routing + Navbar admin link + AdminUsersPage + AdminMatchesPage + admin-reset-password Edge Function
 
 **Wave 4** *(blocked on Wave 3)*
 
-- [ ] 04-04-PLAN.md — Admin UI pools + reports: AdminPoolsPage (create + resolve) + AdminReportsPage (token stats + leaderboard)
+- [x] 04-04-PLAN.md — Admin UI pools + reports: AdminPoolsPage (create + resolve) + AdminReportsPage (token stats + leaderboard)
 
 **Wave 5** *(blocked on Wave 4)*
 
-- [ ] 04-05-PLAN.md — Mobile QA + RLS audit + E2E smoke test + Edge Function deploy + human approval
+- [x] 04-05-PLAN.md — Mobile QA + RLS audit + E2E smoke test + Edge Function deploy + human approval
 
 **UI hint:** yes
 
@@ -152,4 +152,4 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | 1. Infrastructure + Auth | 3/3 | Complete   | 2026-06-06 |
 | 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
 | 3. Apuestas (Bet Pools) | 4/4 | Complete   | 2026-06-11 |
-| 4. Admin Panel + QA + Production | 1/5 | In Progress | - |
+| 4. Admin Panel + QA + Production | 5/5 | Complete   | 2026-06-11 |
