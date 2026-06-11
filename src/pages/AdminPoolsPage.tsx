@@ -32,7 +32,7 @@ export function AdminPoolsPage() {
       .in('status', ['open', 'closed'])
       .order('deadline');
     if (fetchErr) {
-      setError('No se pudieron cargar los pools.');
+      setError(`No se pudieron cargar los pools. (${fetchErr.message})`);
     } else {
       setPools((data ?? []) as unknown as (BetPool & { pool_options: PoolOption[] })[]);
     }
