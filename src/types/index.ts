@@ -221,6 +221,33 @@ export type Database = {
         };
         Relationships: [];
       };
+      admin_logs: {
+        Row: {
+          id: string;
+          admin_id: string;
+          action: string;
+          target_user_id: string | null;
+          details: Record<string, unknown>;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          admin_id: string;
+          action: string;
+          target_user_id?: string | null;
+          details?: Record<string, unknown>;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          admin_id?: string;
+          action?: string;
+          target_user_id?: string | null;
+          details?: Record<string, unknown>;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       leaderboard_view: {
@@ -250,6 +277,11 @@ export type Database = {
         Args: { p_pool_id: string; p_option_id: string; p_amount: number };
         Returns: void;
       };
+      admin_block_user: { Args: { p_target_user_id: string; p_blocked: boolean }; Returns: void; };
+      admin_grant_tokens: { Args: { p_target_user_id: string; p_amount: number; p_note?: string }; Returns: void; };
+      admin_set_match_result: { Args: { p_match_id: string; p_home_score: number; p_away_score: number }; Returns: void; };
+      create_bet_pool: { Args: { p_question: string; p_type: string; p_deadline: string; p_options: string[] }; Returns: string; };
+      admin_resolve_pool: { Args: { p_pool_id: string; p_winning_option_id: string }; Returns: void; };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
@@ -345,3 +377,16 @@ export interface PoolOptionTotal {
   option_id: string;
   tokens_total: number;
 }
+
+export interface AdminLog {
+  id: string;
+  admin_id: string;
+  action: string;
+  target_user_id: string | null;
+  details: Record<string, unknown>;
+  created_at: string;
+}
+
+// AdminUser extends Profile — used in AdminUsersPage to display all users.
+// Fetched via supabase.from('profiles').select('*') with admin SELECT policy active.
+export type AdminUser = Database['public']['Tables']['profiles']['Row'];
