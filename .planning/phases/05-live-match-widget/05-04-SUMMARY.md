@@ -103,5 +103,13 @@ None - no external service configuration required.
 - Plan 05-05 (if any) can build on top of the live widget or close out the phase
 
 ---
+## Self-Check: PASSED
+
+- `src/components/TodayMatchesWidget.tsx` — FOUND
+- `src/pages/CalendarPage.tsx` — FOUND (contains TodayMatchesWidget import + render)
+- `.planning/phases/05-live-match-widget/05-04-SUMMARY.md` — FOUND
+- commit `2aa2904` — FOUND in git log
+- No unexpected file deletions
+
 *Phase: 05-live-match-widget*
 *Completed: 2026-06-12*
