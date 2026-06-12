@@ -7,6 +7,7 @@ import { MatchCard } from '../components/MatchCard';
 import { PredictionModal } from '../components/PredictionModal';
 import { TimezonePicker, detectTimezone, saveTimezone, SUPPORTED_TIMEZONES } from '../components/TimezonePicker';
 import type { Match, Prediction } from '../types/index';
+import { TodayMatchesWidget } from '../components/TodayMatchesWidget';
 
 // WC 2026 has 12 groups A–L (verified: RESEARCH.md critical count correction)
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
@@ -116,6 +117,7 @@ export function CalendarPage() {
   return (
     <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
       <div className="max-w-3xl mx-auto">
+      <TodayMatchesWidget timezone={timezone} />
       <h1 className="text-xl font-bold text-slate-100 mb-4">Calendario</h1>
 
       {/* Timezone bar (D-14, D-15) */}
