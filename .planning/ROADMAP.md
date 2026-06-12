@@ -145,6 +145,25 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **UI hint:** yes
 
+### Phase 5: Partidos del Día — Live Match Widget
+
+**Goal:** A collapsible "Partidos de Hoy" widget on CalendarPage shows today's WC2026 matches with EN VIVO / FINALIZADO status and final scores, auto-updated via cron → Edge Function → Supabase Realtime. No frontend polling. football-data.org free tier.
+**Mode:** mvp
+**Depends on:** Phase 4
+
+**Wave 1**
+- [ ] 05-01-PLAN.md — DB: migration 0009 (external_match_id column + Realtime publication) + types update
+
+**Wave 2** *(blocked on Wave 1)*
+- [ ] 05-02-PLAN.md — [BLOCKING] Schema push: apply migration 0009 to live Supabase
+
+**Wave 3** *(blocked on Wave 2)*
+- [ ] 05-03-PLAN.md — Edge Function sync-live-scores (football-data.org → DB)
+- [ ] 05-04-PLAN.md — TodayMatchesWidget + CalendarPage integration
+
+**Wave 4** *(blocked on Wave 3)*
+- [ ] 05-05-PLAN.md — Deploy + E2E verify checkpoint
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -153,3 +172,4 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
 | 3. Apuestas (Bet Pools) | 4/4 | Complete   | 2026-06-11 |
 | 4. Admin Panel + QA + Production | 5/5 | Complete   | 2026-06-11 |
+| 5. Live Match Widget | 0/5 | Planned | - |
