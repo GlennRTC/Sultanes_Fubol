@@ -21,10 +21,7 @@ export function AdminReportsPage() {
           .select('amount, type')
           .eq('type', 'admin_grant'),
         supabase
-          .from('leaderboard_view')
-          .select('*')
-          .order('leaderboard_points', { ascending: false })
-          .limit(50),
+          .rpc('get_leaderboard'),
       ]);
 
       if (profilesRes.error) {

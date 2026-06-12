@@ -14,10 +14,7 @@ export function LeaderboardPage() {
       setLoading(true);
       setError('');
       const { data, error: fetchError } = await supabase
-        .from('leaderboard_view')
-        .select('id, username, tokens, leaderboard_points')
-        .order('leaderboard_points', { ascending: false })
-        .limit(100);
+        .rpc('get_leaderboard');
       if (fetchError) {
         setError('No se pudo cargar la tabla. Recarga la página.');
       } else {
