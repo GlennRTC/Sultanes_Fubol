@@ -285,6 +285,7 @@ export type Database = {
       admin_set_match_result: { Args: { p_match_id: string; p_home_score: number; p_away_score: number }; Returns: void; };
       create_bet_pool: { Args: { p_question: string; p_type: string; p_deadline: string; p_options: string[] }; Returns: string; };
       admin_resolve_pool: { Args: { p_pool_id: string; p_winning_option_id: string }; Returns: void; };
+      get_leaderboard: { Args: Record<string, never>; Returns: { id: string; username: string; tokens: number; leaderboard_points: number }[]; };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
