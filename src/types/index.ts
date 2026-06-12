@@ -47,6 +47,7 @@ export type Database = {
           away_score: number | null;
           venue: string | null;
           created_at: string;
+          external_match_id: number | null;
         };
         Insert: {
           id?: string;
@@ -59,6 +60,7 @@ export type Database = {
           away_score?: number | null;
           venue?: string | null;
           created_at?: string;
+          external_match_id?: number | null;
         };
         Update: {
           id?: string;
@@ -71,6 +73,7 @@ export type Database = {
           away_score?: number | null;
           venue?: string | null;
           created_at?: string;
+          external_match_id?: number | null;
         };
         Relationships: [];
       };
@@ -313,6 +316,7 @@ export interface Match {
   home_score: number | null;
   away_score: number | null;
   venue: string | null;
+  external_match_id?: number | null;  // set by sync-live-scores Edge Function (D-05)
 }
 
 export interface Prediction {
