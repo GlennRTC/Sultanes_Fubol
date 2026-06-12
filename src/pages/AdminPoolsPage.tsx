@@ -26,16 +26,38 @@ export function AdminPoolsPage() {
   const tz = localStorage.getItem('fubol_timezone') ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   async function fetchPools() {
-    const { data, error: fetchErr } = await supabase
+    const { data: poolData, error: poolErr } = await supabase
       .from('bet_pools')
-      .select('*, pool_options(*)')
+      .select('*')
       .in('status', ['open', 'closed'])
       .order('deadline');
-    if (fetchErr) {
-      setError(`No se pudieron cargar los pools. (${fetchErr.message})`);
-    } else {
-      setPools((data ?? []) as unknown as (BetPool & { pool_options: PoolOption[] })[]);
+    if (poolErr) {
+      setError(`No se pudieron cargar los pools. (${poolErr.message})`);
+      setLoadingPools(false);
+      return;
     }
+    const poolList = (poolData ?? []) as BetPool[];
+    if (poolList.length === 0) {
+      setPools([]);
+      setLoadingPools(false);
+      return;
+    }
+    const poolIds = poolList.map(p => p.id);
+    const { data: optData, error: optErr } = await supabase
+      .from('pool_options')
+      .select('*')
+      .in('pool_id', poolIds)
+      .order('position');
+    if (optErr) {
+      setError(`No se pudieron cargar las opciones. (${optErr.message})`);
+      setLoadingPools(false);
+      return;
+    }
+    const options = (optData ?? []) as PoolOption[];
+    setPools(poolList.map(p => ({
+      ...p,
+      pool_options: options.filter(o => o.pool_id === p.id),
+    })));
     setLoadingPools(false);
   }
 
