@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: complete
 stopped_at: All 4 phases complete — FUBOL v1.0 shipped
-last_updated: "2026-06-11"
-last_activity: 2026-06-11 -- Phase 04 complete (admin panel, mobile QA, RLS audit, E2E smoke test)
+last_updated: "2026-06-12"
+last_activity: 2026-06-12 -- Phase 05 Plan 04 complete (TodayMatchesWidget with Realtime updates)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -84,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-11
-Stopped at: Phase 04 Plan 01 complete — next is 04-02 schema push
-Resume file: .planning/phases/04-admin-panel-qa-production/04-02-PLAN.md
+Last session: 2026-06-12
+Stopped at: Phase 05 Plan 04 complete — TodayMatchesWidget + CalendarPage integration shipped
+Resume file: .planning/phases/05-live-match-widget/05-05-PLAN.md
