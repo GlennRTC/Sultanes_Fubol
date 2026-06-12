@@ -11,34 +11,41 @@ export function TodayMatchesWidget({ timezone }: { timezone: string }) {
     return stored === null ? true : stored === 'true';
   });
 
-  // Initial fetch — today's matches in UTC date range
+  // Initial fetch — today's matches filtered by user's local timezone date
   useEffect(() => {
     async function fetchTodayMatches() {
       const now = new Date();
-      const todayStart = new Date(
-        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0)
+      // Fetch a 3-day UTC window to cover all timezone offsets (UTC-12 to UTC+14)
+      const windowStart = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 0, 0, 0)
       ).toISOString();
-      const todayEnd = new Date(
-        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59)
+      const windowEnd = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 23, 59, 59)
       ).toISOString();
 
       const { data, error } = await supabase
         .from('matches')
         .select('*')
-        .gte('match_datetime', todayStart)
-        .lte('match_datetime', todayEnd)
+        .gte('match_datetime', windowStart)
+        .lte('match_datetime', windowEnd)
         .order('match_datetime');
 
       if (error) {
         console.error('TodayMatchesWidget fetch error:', error.message);
       } else {
-        setMatches(data ?? []);
+        // Filter client-side: only keep matches whose local date equals today in user's timezone
+        const todayLocal = format(toZonedTime(now, timezone), 'yyyy-MM-dd');
+        const todayMatches = (data ?? []).filter(m => {
+          const localDate = format(toZonedTime(new Date(m.match_datetime), timezone), 'yyyy-MM-dd');
+          return localDate === todayLocal;
+        });
+        setMatches(todayMatches);
       }
       setLoading(false);
     }
 
     fetchTodayMatches();
-  }, []);
+  }, [timezone]);
 
   // Realtime subscription — UPDATE events on matches table (follows ApuestasPage pattern)
   useEffect(() => {
