@@ -112,8 +112,8 @@ export function AdminUsersPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-4">Gestión de Usuarios</h1>
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6 max-w-4xl mx-auto">
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Gestión de Usuarios</h1>
 
       {error && (
         <div role="alert" className="bg-red-900/50 border border-red-700 rounded-lg px-4 py-3 mb-4">
@@ -121,13 +121,13 @@ export function AdminUsersPage() {
         </div>
       )}
       {success && (
-        <div role="status" className="bg-green-900/50 border border-green-700 rounded-lg px-4 py-3 mb-4">
-          <p className="text-sm text-green-300">{success}</p>
+        <div role="status" className="bg-emerald-950/80 border border-emerald-700/50 rounded-lg px-4 py-3 mb-4">
+          <p className="text-sm text-emerald-300">{success}</p>
         </div>
       )}
 
       {loading ? (
-        <div className="flex items-center gap-2 text-slate-400">
+        <div className="flex items-center gap-2 text-zinc-400">
           <Loader2 size={20} className="animate-spin" />
           <span>Cargando usuarios...</span>
         </div>
@@ -138,30 +138,30 @@ export function AdminUsersPage() {
             placeholder="Buscar usuario..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 mb-4 focus:outline-none focus:border-green-500"
+            className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 mb-4 focus:outline-none focus:border-emerald-500"
           />
 
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b border-slate-700">
-                  <th className="text-xs text-slate-400 font-medium py-2 pr-4">Usuario</th>
-                  <th className="text-xs text-slate-400 font-medium py-2 pr-4">Fichas</th>
-                  <th className="text-xs text-slate-400 font-medium py-2 pr-4">Estado</th>
-                  <th className="text-xs text-slate-400 font-medium py-2">Acciones</th>
+                <tr className="border-b border-zinc-700">
+                  <th className="text-xs text-zinc-400 font-medium py-2 pr-4">Usuario</th>
+                  <th className="text-xs text-zinc-400 font-medium py-2 pr-4">Fichas</th>
+                  <th className="text-xs text-zinc-400 font-medium py-2 pr-4">Estado</th>
+                  <th className="text-xs text-zinc-400 font-medium py-2">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map(user => (
-                  <tr key={user.id} className="border-b border-slate-800">
-                    <td className="text-slate-100 text-sm whitespace-nowrap py-3 pr-4">
+                  <tr key={user.id} className="border-b border-zinc-900">
+                    <td className="text-zinc-100 text-sm whitespace-nowrap py-3 pr-4">
                       {user.username}
                     </td>
-                    <td className="text-green-400 text-sm py-3 pr-4">
+                    <td className="text-emerald-400 text-sm py-3 pr-4">
                       {user.tokens}
                     </td>
                     <td className="py-3 pr-4">
-                      <span className={`text-xs ${user.is_blocked ? 'text-red-400' : 'text-green-400'}`}>
+                      <span className={`text-xs ${user.is_blocked ? 'text-red-400' : 'text-emerald-400'}`}>
                         {user.is_blocked ? 'Bloqueado' : 'Activo'}
                       </span>
                     </td>
@@ -173,7 +173,7 @@ export function AdminUsersPage() {
                           disabled={actionLoading === user.id}
                           className={`min-h-[44px] px-3 text-xs rounded-lg text-white disabled:opacity-50 ${
                             user.is_blocked
-                              ? 'bg-green-800 hover:bg-green-700'
+                              ? 'bg-emerald-800 hover:bg-emerald-700'
                               : 'bg-red-800 hover:bg-red-700'
                           }`}
                         >
@@ -183,7 +183,7 @@ export function AdminUsersPage() {
                           type="button"
                           onClick={() => handleResetPassword(user.id, user.username)}
                           disabled={actionLoading === user.id}
-                          className="min-h-[44px] px-3 text-xs bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg disabled:opacity-50 flex items-center gap-1"
+                          className="min-h-[44px] px-3 text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg disabled:opacity-50 flex items-center gap-1"
                         >
                           {actionLoading === user.id
                             ? <Loader2 size={14} className="animate-spin" />
@@ -199,13 +199,13 @@ export function AdminUsersPage() {
           </div>
 
           {/* Token grant / remove section */}
-          <div className="mt-6 border-t border-slate-700 pt-6">
-            <h2 className="text-base font-bold text-slate-100 mb-3">Otorgar / Remover Fichas</h2>
+          <div className="mt-6 border-t border-zinc-700 pt-6">
+            <h2 className="text-base font-bold text-zinc-100 mb-3">Otorgar / Remover Fichas</h2>
             <form onSubmit={handleGrantTokens}>
               <select
                 value={grantUserId}
                 onChange={e => setGrantUserId(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 mb-3 min-h-[44px] focus:outline-none focus:border-green-500"
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 mb-3 min-h-[44px] focus:outline-none focus:border-emerald-500"
               >
                 <option value="">Selecciona usuario</option>
                 {users.map(u => (
@@ -219,19 +219,19 @@ export function AdminUsersPage() {
                 placeholder="-100 para remover, +100 para otorgar"
                 value={grantAmount}
                 onChange={e => setGrantAmount(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 mb-3 min-h-[44px] focus:outline-none focus:border-green-500"
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 mb-3 min-h-[44px] focus:outline-none focus:border-emerald-500"
               />
               <input
                 type="text"
                 placeholder="Nota (opcional)"
                 value={grantNote}
                 onChange={e => setGrantNote(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 mb-3 min-h-[44px] focus:outline-none focus:border-green-500"
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 mb-3 min-h-[44px] focus:outline-none focus:border-emerald-500"
               />
               <button
                 type="submit"
                 disabled={actionLoading !== null}
-                className="min-h-[44px] w-full bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white rounded-lg font-bold text-sm"
+                className="min-h-[44px] w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white rounded-lg font-bold text-sm"
               >
                 Aplicar fichas
               </button>

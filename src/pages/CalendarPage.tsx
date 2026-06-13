@@ -115,18 +115,18 @@ export function CalendarPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6">
       <div className="max-w-3xl mx-auto">
       <TodayMatchesWidget timezone={timezone} />
-      <h1 className="text-xl font-bold text-slate-100 mb-4">Calendario</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Calendario</h1>
 
       {/* Timezone bar (D-14, D-15) */}
-      <p className="text-sm text-slate-400 mb-4">
+      <p className="text-sm text-zinc-400 mb-4">
         Zona: {timezoneLabel} ·{' '}
         <button
           type="button"
           onClick={() => setShowTimezonePicker(true)}
-          className="text-green-400 hover:text-green-300 underline text-sm"
+          className="text-emerald-400 hover:text-emerald-300 underline text-sm"
         >
           Cambiar
         </button>
@@ -151,8 +151,8 @@ export function CalendarPage() {
           onClick={() => setView('fecha')}
           className={`px-4 py-2 rounded-lg text-sm min-h-[44px] ${
             view === 'fecha'
-              ? 'bg-slate-700 text-slate-100 font-bold'
-              : 'bg-transparent text-slate-400 hover:text-slate-100'
+              ? 'bg-zinc-800 text-zinc-100 font-bold'
+              : 'bg-transparent text-zinc-400 hover:text-zinc-100'
           }`}
         >
           Por fecha
@@ -162,8 +162,8 @@ export function CalendarPage() {
           onClick={() => setView('grupo')}
           className={`px-4 py-2 rounded-lg text-sm min-h-[44px] ${
             view === 'grupo'
-              ? 'bg-slate-700 text-slate-100 font-bold'
-              : 'bg-transparent text-slate-400 hover:text-slate-100'
+              ? 'bg-zinc-800 text-zinc-100 font-bold'
+              : 'bg-transparent text-zinc-400 hover:text-zinc-100'
           }`}
         >
           Por grupo
@@ -173,7 +173,7 @@ export function CalendarPage() {
       {/* Loading state */}
       {loading && (
         <div className="flex items-center justify-center py-16">
-          <span className="inline-block w-8 h-8 rounded-full border-2 border-green-500 border-t-transparent animate-spin" />
+          <span className="inline-block w-8 h-8 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
         </div>
       )}
 
@@ -194,7 +194,7 @@ export function CalendarPage() {
                 <select
                   value={filterGroup}
                   onChange={(e) => { setFilterGroup(e.target.value); setFilterTeam(''); }}
-                  className="flex-1 min-w-[140px] bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="flex-1 min-w-[140px] bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
                   aria-label="Grupo:"
                 >
                   <option value="">Grupo: Todos</option>
@@ -205,7 +205,7 @@ export function CalendarPage() {
                 <select
                   value={filterTeam}
                   onChange={(e) => setFilterTeam(e.target.value)}
-                  className="flex-1 min-w-[140px] bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="flex-1 min-w-[140px] bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
                   aria-label="Equipo:"
                 >
                   <option value="">Equipo: Todos</option>
@@ -218,15 +218,15 @@ export function CalendarPage() {
               {/* Date-grouped matches (Pitfall 2 — group by LOCAL date, not UTC string) */}
               {filteredMatches.length === 0 ? (
                 <div className="py-12 text-center">
-                  <p className="text-slate-100 font-bold mb-2">Sin partidos</p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-zinc-100 font-bold mb-2">Sin partidos</p>
+                  <p className="text-sm text-zinc-400">
                     Ningún partido coincide con los filtros seleccionados. Selecciona «Todos» para ver todos.
                   </p>
                 </div>
               ) : (
                 Array.from(groupMatchesByLocalDate(filteredMatches, timezone)).map(([dateKey, dayMatches]) => (
                   <div key={dateKey}>
-                    <h2 className="text-sm font-bold text-slate-300 mt-6 mb-2 uppercase tracking-wide">
+                    <h2 className="text-sm font-bold text-zinc-300 mt-6 mb-2 uppercase tracking-wide">
                       {formatDateHeader(dateKey)}
                     </h2>
                     {dayMatches.map((m) => (
@@ -256,8 +256,8 @@ export function CalendarPage() {
                     onClick={() => setActiveGroup(g)}
                     className={`px-4 py-2 rounded-lg text-sm min-h-[44px] whitespace-nowrap shrink-0 ${
                       activeGroup === g
-                        ? 'bg-slate-700 text-slate-100 font-bold'
-                        : 'bg-transparent text-slate-400 hover:text-slate-100'
+                        ? 'bg-zinc-800 text-zinc-100 font-bold'
+                        : 'bg-transparent text-zinc-400 hover:text-zinc-100'
                     }`}
                   >
                     Grupo {g}

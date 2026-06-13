@@ -53,8 +53,8 @@ export function AdminReportsPage() {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-6">Reportes</h1>
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6 max-w-4xl mx-auto">
+      <h1 className="text-xl font-bold text-zinc-100 mb-6">Reportes</h1>
 
       {error && (
         <div role="alert" className="bg-red-900/50 border border-red-700 rounded-lg px-4 py-3 mb-4">
@@ -63,7 +63,7 @@ export function AdminReportsPage() {
       )}
 
       {loading ? (
-        <div className="flex items-center gap-2 text-slate-400">
+        <div className="flex items-center gap-2 text-zinc-400">
           <Loader2 size={20} className="animate-spin" />
           <span>Cargando reportes...</span>
         </div>
@@ -72,55 +72,55 @@ export function AdminReportsPage() {
           {/* SECTION 1 — Stat cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {/* Card 1: Fichas en circulación (SUM profiles.tokens — current balances) */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4">
-              <p className="text-2xl font-bold text-green-400">
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4">
+              <p className="text-2xl font-bold text-amber-300">
                 {circulacion !== null ? circulacion.toLocaleString('es') : '—'}
               </p>
-              <p className="text-sm text-slate-100 mt-1">Fichas en circulación</p>
-              <p className="text-xs text-slate-400 mt-1">Total en cuentas de usuarios</p>
+              <p className="text-sm text-zinc-100 mt-1">Fichas en circulación</p>
+              <p className="text-xs text-zinc-400 mt-1">Total en cuentas de usuarios</p>
             </div>
 
             {/* Card 2: Total fichas otorgadas por admin (SUM admin_grant positives only) */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4">
-              <p className="text-2xl font-bold text-green-400">
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4">
+              <p className="text-2xl font-bold text-amber-300">
                 {totalGranted !== null ? totalGranted.toLocaleString('es') : '—'}
               </p>
-              <p className="text-sm text-slate-100 mt-1">Total otorgadas por admin</p>
-              <p className="text-xs text-slate-400 mt-1">Suma de otorgamientos de administrador</p>
+              <p className="text-sm text-zinc-100 mt-1">Total otorgadas por admin</p>
+              <p className="text-xs text-zinc-400 mt-1">Suma de otorgamientos de administrador</p>
             </div>
 
             {/* Card 3: Usuarios activos (COUNT profiles WHERE tokens > 0) */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4">
-              <p className="text-2xl font-bold text-green-400">
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4">
+              <p className="text-2xl font-bold text-amber-300">
                 {activeUsers !== null ? activeUsers : '—'}
               </p>
-              <p className="text-sm text-slate-100 mt-1">Usuarios activos</p>
-              <p className="text-xs text-slate-400 mt-1">Con más de 0 fichas en cuenta</p>
+              <p className="text-sm text-zinc-100 mt-1">Usuarios activos</p>
+              <p className="text-xs text-zinc-400 mt-1">Con más de 0 fichas en cuenta</p>
             </div>
           </div>
 
           {/* SECTION 2 — Leaderboard table */}
-          <h2 className="text-base font-bold text-slate-100 mb-3">Top Predictores</h2>
+          <h2 className="text-base font-bold text-zinc-100 mb-3">Top Predictores</h2>
           {leaderboard.length === 0 ? (
-            <p className="text-slate-400 text-sm">Sin datos de tabla.</p>
+            <p className="text-zinc-400 text-sm">Sin datos de tabla.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-slate-700">
-                    <th className="text-xs text-slate-400 font-medium py-2 pr-4 text-left w-8">#</th>
-                    <th className="text-xs text-slate-400 font-medium py-2 pr-4 text-left">Usuario</th>
-                    <th className="text-xs text-slate-400 font-medium py-2 pr-4 text-left">Puntos</th>
-                    <th className="text-xs text-slate-400 font-medium py-2 text-left">Fichas</th>
+                  <tr className="border-b border-zinc-700">
+                    <th className="text-xs text-zinc-400 font-medium py-2 pr-4 text-left w-8">#</th>
+                    <th className="text-xs text-zinc-400 font-medium py-2 pr-4 text-left">Usuario</th>
+                    <th className="text-xs text-zinc-400 font-medium py-2 pr-4 text-left">Puntos</th>
+                    <th className="text-xs text-zinc-400 font-medium py-2 text-left">Fichas</th>
                   </tr>
                 </thead>
                 <tbody>
                   {leaderboard.map((entry, i) => (
-                    <tr key={entry.id} className="border-t border-slate-700">
-                      <td className="text-slate-400 w-8 py-2 pr-4">{i + 1}</td>
-                      <td className="text-slate-100 py-2 pr-4">{entry.username}</td>
-                      <td className="text-green-400 py-2 pr-4">{entry.leaderboard_points}</td>
-                      <td className="text-slate-300 py-2">{entry.tokens}</td>
+                    <tr key={entry.id} className="border-t border-zinc-700">
+                      <td className="text-zinc-400 w-8 py-2 pr-4">{i + 1}</td>
+                      <td className="text-zinc-100 py-2 pr-4">{entry.username}</td>
+                      <td className="text-emerald-400 py-2 pr-4">{entry.leaderboard_points}</td>
+                      <td className="text-zinc-300 py-2">{entry.tokens}</td>
                     </tr>
                   ))}
                 </tbody>

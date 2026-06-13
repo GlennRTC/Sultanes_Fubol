@@ -29,9 +29,9 @@ export function LeaderboardPage() {
   const hasScores = entries.some((e) => e.leaderboard_points > 0);
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6">
       <div className="max-w-3xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-4">Tabla de posiciones</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Tabla de posiciones</h1>
 
       {/* Error banner */}
       {error && (
@@ -46,7 +46,7 @@ export function LeaderboardPage() {
       {/* Loading state */}
       {loading && (
         <div className="flex items-center justify-center py-12">
-          <span className="inline-block w-6 h-6 rounded-full border-2 border-green-500 border-t-transparent animate-spin" />
+          <span className="inline-block w-6 h-6 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
         </div>
       )}
 
@@ -55,19 +55,19 @@ export function LeaderboardPage() {
         <>
           {entries.length === 0 || !hasScores ? (
             /* Empty state */
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-8 text-center">
-              <h2 className="text-base font-bold text-slate-100 mb-2">
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-8 text-center">
+              <h2 className="text-base font-bold text-zinc-100 mb-2">
                 Aún no hay puntos registrados
               </h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-zinc-400">
                 Los puntos se actualizan cuando el administrador ingresa los resultados de los partidos.
               </p>
             </div>
           ) : (
             /* Leaderboard table */
-            <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden">
               {/* Header row */}
-              <div className="flex items-center px-4 py-2 text-sm font-bold text-slate-300 border-b border-slate-700 bg-slate-800">
+              <div className="flex items-center px-4 py-2 text-sm font-bold text-zinc-300 border-b border-zinc-700 bg-zinc-900">
                 <span className="w-8">#</span>
                 <span className="flex-1">Usuario</span>
                 <span className="w-20 text-right">Puntos</span>
@@ -80,16 +80,16 @@ export function LeaderboardPage() {
                 return (
                   <div
                     key={entry.id}
-                    className={`flex items-center px-4 py-3 text-base text-slate-100 border-b border-slate-700 last:border-b-0 hover:bg-slate-700/30 ${
-                      isOwnRow ? 'bg-slate-700/50' : ''
+                    className={`flex items-center px-4 py-3 text-base text-zinc-100 border-b border-zinc-700 last:border-b-0 hover:bg-zinc-800/30 ${
+                      isOwnRow ? 'bg-zinc-800/50' : ''
                     }`}
                   >
-                    <span className="w-8 text-sm text-slate-400">{index + 1}</span>
-                    <span className="flex-1 text-slate-100">{entry.username}</span>
-                    <span className="w-20 text-right text-slate-100 font-bold">
+                    <span className="w-8 text-sm text-zinc-400">{index + 1}</span>
+                    <span className="flex-1 text-zinc-100">{entry.username}</span>
+                    <span className="w-20 text-right text-zinc-100 font-bold">
                       {entry.leaderboard_points}
                     </span>
-                    <span className="w-20 text-right text-slate-400">{entry.tokens}</span>
+                    <span className="w-20 text-right text-amber-400">{entry.tokens}</span>
                   </div>
                 );
               })}

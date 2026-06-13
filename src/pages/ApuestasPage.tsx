@@ -122,9 +122,9 @@ export function ApuestasPage() {
   const closedPools = pools.filter((p) => p.status === 'resolved');
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6">
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6">
       <div className="max-w-3xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-4">Apuestas</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Apuestas</h1>
 
       {loading && <FullScreenSpinner />}
 
@@ -139,14 +139,14 @@ export function ApuestasPage() {
           {/* ACTIVAS SECTION */}
           {activePools.length === 0 ? (
             <div>
-              <p className="text-base text-slate-400 font-bold mb-1">Sin apuestas activas</p>
-              <p className="text-sm text-slate-400">
+              <p className="text-base text-zinc-400 font-bold mb-1">Sin apuestas activas</p>
+              <p className="text-sm text-zinc-400">
                 El administrador no ha creado ninguna apuesta abierta todavía.
               </p>
             </div>
           ) : (
             <>
-              <h2 className="text-sm font-bold text-slate-300 mt-2 mb-3 uppercase tracking-wide">
+              <h2 className="text-sm font-bold text-zinc-300 mt-2 mb-3 uppercase tracking-wide">
                 Activas
               </h2>
               {activePools.map((pool) => (
@@ -164,7 +164,7 @@ export function ApuestasPage() {
           {/* CERRADAS SECTION — hidden when empty (UI-SPEC: "section is simply hidden if empty") */}
           {closedPools.length > 0 && (
             <>
-              <h2 className="text-sm font-bold text-slate-300 mt-6 mb-3 uppercase tracking-wide">
+              <h2 className="text-sm font-bold text-zinc-300 mt-6 mb-3 uppercase tracking-wide">
                 Cerradas
               </h2>
               {closedPools.map((pool) => (

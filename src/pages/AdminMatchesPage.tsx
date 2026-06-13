@@ -69,8 +69,8 @@ export function AdminMatchesPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-4">Resultados de Partidos</h1>
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6 max-w-4xl mx-auto">
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Resultados de Partidos</h1>
 
       {error && (
         <div role="alert" className="bg-red-900/50 border border-red-700 rounded-lg px-4 py-3 mb-4">
@@ -78,30 +78,30 @@ export function AdminMatchesPage() {
         </div>
       )}
       {success && (
-        <div role="status" className="bg-green-900/50 border border-green-700 rounded-lg px-4 py-3 mb-4">
-          <p className="text-sm text-green-300">{success}</p>
+        <div role="status" className="bg-emerald-950/80 border border-emerald-700/50 rounded-lg px-4 py-3 mb-4">
+          <p className="text-sm text-emerald-300">{success}</p>
         </div>
       )}
 
       {loading ? (
-        <div className="flex items-center gap-2 text-slate-400">
+        <div className="flex items-center gap-2 text-zinc-400">
           <Loader2 size={20} className="animate-spin" />
           <span>Cargando partidos...</span>
         </div>
       ) : matches.length === 0 ? (
-        <p className="text-slate-400">No hay partidos pendientes de resultado.</p>
+        <p className="text-zinc-400">No hay partidos pendientes de resultado.</p>
       ) : (
         <div className="flex flex-col gap-3">
           {matches.map(match => (
-            <div key={match.id} className="bg-slate-800 border border-slate-700 rounded-xl p-4">
+            <div key={match.id} className="bg-zinc-900 border border-zinc-700 rounded-xl p-4">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-slate-100 text-sm font-bold">
+                <span className="text-zinc-100 text-sm font-bold">
                   {match.home_team} vs {match.away_team}
                 </span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-zinc-400">
                   {formatInTimeZone(new Date(match.match_datetime), tz, "d MMM · HH:mm zzz", { locale: es })}
                 </span>
-                <span className={`text-xs font-medium ${match.status === 'live' ? 'text-green-400' : 'text-slate-400'}`}>
+                <span className={`text-xs font-medium ${match.status === 'live' ? 'text-emerald-400' : 'text-zinc-400'}`}>
                   {match.status === 'live' ? 'EN VIVO' : 'Programado'}
                 </span>
               </div>
@@ -119,9 +119,9 @@ export function AdminMatchesPage() {
                     }))
                   }
                   placeholder="0"
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-2 py-2 text-center text-slate-100 text-sm focus:outline-none focus:border-green-500 min-h-[44px]"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-2 text-center text-zinc-100 text-sm focus:outline-none focus:border-emerald-500 min-h-[44px]"
                 />
-                <span className="text-slate-400">–</span>
+                <span className="text-zinc-400">–</span>
                 <input
                   type="number"
                   min="0"
@@ -135,13 +135,13 @@ export function AdminMatchesPage() {
                     }))
                   }
                   placeholder="0"
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-2 py-2 text-center text-slate-100 text-sm focus:outline-none focus:border-green-500 min-h-[44px]"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-2 text-center text-zinc-100 text-sm focus:outline-none focus:border-emerald-500 min-h-[44px]"
                 />
                 <button
                   type="button"
                   onClick={() => handleSetScore(match.id)}
                   disabled={submitting === match.id}
-                  className="ml-2 min-h-[44px] px-4 bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white font-bold text-sm rounded-lg flex items-center gap-1"
+                  className="ml-2 min-h-[44px] px-4 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-bold text-sm rounded-lg flex items-center gap-1"
                 >
                   {submitting === match.id
                     ? <Loader2 size={16} className="animate-spin" />
@@ -154,7 +154,7 @@ export function AdminMatchesPage() {
         </div>
       )}
 
-      <p className="text-xs text-slate-500 mt-4">Los partidos finalizados no aparecen aquí.</p>
+      <p className="text-xs text-zinc-500 mt-4">Los partidos finalizados no aparecen aquí.</p>
     </div>
   );
 }

@@ -164,8 +164,8 @@ export function AdminPoolsPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-900 px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-bold text-slate-100 mb-6">Gestión de Apuestas</h1>
+    <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6 max-w-4xl mx-auto">
+      <h1 className="text-xl font-bold text-zinc-100 mb-6">Gestión de Apuestas</h1>
 
       {error && (
         <div role="alert" className="bg-red-900/50 border border-red-700 rounded-lg px-4 py-3 mb-4">
@@ -173,14 +173,14 @@ export function AdminPoolsPage() {
         </div>
       )}
       {success && (
-        <div role="status" className="bg-green-900/50 border border-green-700 rounded-lg px-4 py-3 mb-4">
-          <p className="text-sm text-green-300">{success}</p>
+        <div role="status" className="bg-emerald-950/80 border border-emerald-700/50 rounded-lg px-4 py-3 mb-4">
+          <p className="text-sm text-emerald-300">{success}</p>
         </div>
       )}
 
       {/* SECTION 1 — Create Pool */}
-      <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 mb-6">
-        <h2 className="text-base font-bold text-slate-100 mb-4">Crear Pool</h2>
+      <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 mb-6">
+        <h2 className="text-base font-bold text-zinc-100 mb-4">Crear Pool</h2>
         <form onSubmit={handleCreate} className="flex flex-col gap-3">
           {/* Question */}
           <textarea
@@ -188,16 +188,16 @@ export function AdminPoolsPage() {
             placeholder="Pregunta del pool"
             value={question}
             onChange={e => setQuestion(e.target.value)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-green-500 resize-none"
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-emerald-500 resize-none"
           />
 
           {/* Type */}
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Tipo</label>
+            <label className="block text-xs text-zinc-400 mb-1">Tipo</label>
             <select
               value={poolType}
               onChange={e => setPoolType(e.target.value as 'binary' | 'multiple_exclusive')}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
             >
               <option value="binary">Binario (Sí/No)</option>
               <option value="multiple_exclusive">Opción múltiple</option>
@@ -206,19 +206,19 @@ export function AdminPoolsPage() {
 
           {/* Deadline */}
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Fecha límite</label>
+            <label className="block text-xs text-zinc-400 mb-1">Fecha límite</label>
             <input
               type="datetime-local"
               value={deadline}
               onChange={e => setDeadline(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
             />
-            <p className="text-xs text-slate-500 mt-1">Hora local. Se guardará en UTC.</p>
+            <p className="text-xs text-zinc-500 mt-1">Hora local. Se guardará en UTC.</p>
           </div>
 
           {/* Options */}
           <div>
-            <label className="block text-xs text-slate-400 mb-2">Opciones (min. 2, max. 4)</label>
+            <label className="block text-xs text-zinc-400 mb-2">Opciones (min. 2, max. 4)</label>
             {options.map((opt, i) => (
               <div key={i} className="flex gap-2 items-center mb-2">
                 <input
@@ -226,7 +226,7 @@ export function AdminPoolsPage() {
                   placeholder={`Opción ${i + 1}`}
                   value={opt}
                   onChange={e => updateOption(i, e.target.value)}
-                  className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
                 />
                 {options.length > 2 && (
                   <button
@@ -244,7 +244,7 @@ export function AdminPoolsPage() {
               <button
                 type="button"
                 onClick={addOption}
-                className="flex items-center gap-1 text-sm text-green-400 hover:text-green-300 mt-1 min-h-[44px]"
+                className="flex items-center gap-1 text-sm text-emerald-400 hover:text-emerald-300 mt-1 min-h-[44px]"
               >
                 <Plus size={16} />
                 Agregar opción
@@ -256,7 +256,7 @@ export function AdminPoolsPage() {
           <button
             type="submit"
             disabled={creating}
-            className="min-h-[44px] w-full bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white font-bold rounded-lg flex items-center justify-center gap-2"
+            className="min-h-[44px] w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-bold rounded-lg flex items-center justify-center gap-2"
           >
             {creating ? <Loader2 size={18} className="animate-spin" /> : 'Crear pool'}
           </button>
@@ -265,20 +265,20 @@ export function AdminPoolsPage() {
 
       {/* SECTION 2 — Active Pools */}
       <div className="mt-2">
-        <h2 className="text-base font-bold text-slate-100 mb-3">Pools Activos</h2>
+        <h2 className="text-base font-bold text-zinc-100 mb-3">Pools Activos</h2>
         {loadingPools ? (
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-zinc-400">
             <Loader2 size={20} className="animate-spin" />
             <span>Cargando pools...</span>
           </div>
         ) : pools.length === 0 ? (
-          <p className="text-slate-400 text-sm">No hay pools abiertos o cerrados actualmente.</p>
+          <p className="text-zinc-400 text-sm">No hay pools abiertos o cerrados actualmente.</p>
         ) : (
           pools.map(pool => (
-            <div key={pool.id} className="bg-slate-800 border border-slate-700 rounded-xl p-4 mb-3">
-              <p className="text-sm font-bold text-slate-100 mb-1">{pool.question}</p>
-              <p className="text-xs text-slate-400 mb-3">
-                <span className={pool.status === 'open' ? 'text-green-400' : 'text-slate-400'}>
+            <div key={pool.id} className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 mb-3">
+              <p className="text-sm font-bold text-zinc-100 mb-1">{pool.question}</p>
+              <p className="text-xs text-zinc-400 mb-3">
+                <span className={pool.status === 'open' ? 'text-emerald-400' : 'text-zinc-400'}>
                   {pool.status === 'open' ? 'Abierta' : 'Cerrada'}
                 </span>
                 {' · Cierre: '}
@@ -290,7 +290,7 @@ export function AdminPoolsPage() {
                   onChange={e =>
                     setResolveSelections(prev => ({ ...prev, [pool.id]: e.target.value }))
                   }
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm text-slate-100 min-h-[44px] focus:outline-none focus:border-green-500"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
                 >
                   <option value="">Selecciona opción ganadora</option>
                   {[...pool.pool_options]
@@ -305,7 +305,7 @@ export function AdminPoolsPage() {
                   type="button"
                   onClick={() => handleResolve(pool.id)}
                   disabled={resolving === pool.id || !resolveSelections[pool.id]}
-                  className="min-h-[44px] px-4 bg-slate-600 hover:bg-slate-500 disabled:opacity-50 text-white text-sm font-bold rounded-lg flex items-center justify-center gap-2"
+                  className="min-h-[44px] px-4 bg-zinc-700 hover:bg-zinc-600 disabled:opacity-50 text-white text-sm font-bold rounded-lg flex items-center justify-center gap-2"
                 >
                   {resolving === pool.id ? (
                     <Loader2 size={16} className="animate-spin" />

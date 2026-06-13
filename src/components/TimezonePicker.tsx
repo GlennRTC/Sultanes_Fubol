@@ -59,10 +59,10 @@ export function TimezonePicker({ current, onSelect, onClose }: TimezonePickerPro
       onClick={onClose}
     >
       <div
-        className="bg-slate-800 border border-slate-700 rounded-xl p-4 w-full max-w-[320px]"
+        className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-full max-w-[320px]"
         onClick={(e) => e.stopPropagation()}
       >
-        <p className="text-sm font-bold text-slate-300 mb-3">Selecciona tu zona horaria</p>
+        <p className="text-sm font-bold text-zinc-300 mb-3">Selecciona tu zona horaria</p>
         <div className="flex flex-col">
           {SUPPORTED_TIMEZONES.map(({ label, iana }) => (
             <button
@@ -72,8 +72,8 @@ export function TimezonePicker({ current, onSelect, onClose }: TimezonePickerPro
                 onSelect(iana);
                 onClose();
               }}
-              className={`w-full text-left px-3 py-2 text-sm text-slate-100 hover:bg-slate-700 rounded-lg min-h-[44px]${
-                current === iana ? ' bg-slate-700' : ''
+              className={`w-full text-left px-3 py-2 text-sm text-zinc-100 hover:bg-zinc-800 rounded-lg min-h-[44px]${
+                current === iana ? ' bg-zinc-800' : ''
               }`}
             >
               {label}

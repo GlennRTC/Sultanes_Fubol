@@ -79,7 +79,7 @@ export function App() {
             element={
               <>
                 <Navbar />
-                <main className="min-h-[calc(100vh-56px)] bg-slate-900">
+                <main className="min-h-[calc(100vh-56px)] bg-zinc-950">
                   <Outlet />
                 </main>
               </>

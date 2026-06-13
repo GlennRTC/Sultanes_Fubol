@@ -77,7 +77,7 @@ export function LoginPage() {
           {/* Hero brand */}
           <div className="text-center animate-fade-down">
             <Volleyball
-              className="inline-block animate-float text-green-400 mb-2"
+              className="inline-block animate-float text-emerald-400 mb-2"
               size={52}
               strokeWidth={1.5}
               aria-hidden="true"
@@ -88,18 +88,18 @@ export function LoginPage() {
             >
               Sultanes Del FUBOL
             </h1>
-            <p className="text-green-400 text-xs tracking-[0.25em] uppercase mt-2 font-medium">
+            <p className="text-emerald-400 text-xs tracking-[0.25em] uppercase mt-2 font-medium">
               Copa Mundial 2026
             </p>
           </div>
 
           {/* Login form */}
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-7 animate-fade-up">
-            <h2 className="text-lg font-bold text-slate-100 mb-5">Iniciar sesión</h2>
+          <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-7 animate-fade-up">
+            <h2 className="text-lg font-bold text-zinc-100 mb-5">Iniciar sesión</h2>
 
             {passwordReset && (
-              <div role="alert" className="bg-green-900/50 border border-green-700 rounded-lg px-4 py-3 mb-4">
-                <p className="text-sm text-green-300">Contraseña actualizada. Puedes iniciar sesión.</p>
+              <div role="alert" className="bg-emerald-950/80 border border-emerald-700/50 rounded-lg px-4 py-3 mb-4">
+                <p className="text-sm text-emerald-300">Contraseña actualizada. Puedes iniciar sesión.</p>
               </div>
             )}
 
@@ -111,7 +111,7 @@ export function LoginPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm text-slate-300 mb-1">
+                <label htmlFor="email" className="block text-sm text-zinc-300 mb-1">
                   Correo electrónico
                 </label>
                 <input
@@ -120,12 +120,12 @@ export function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm text-slate-300 mb-1">
+                <label htmlFor="password" className="block text-sm text-zinc-300 mb-1">
                   Contraseña
                 </label>
                 <input
@@ -134,12 +134,12 @@ export function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
 
               <div className="text-right">
-                <Link to="/restablecer-contrasena" className="text-sm text-green-400 hover:text-green-300 underline">
+                <Link to="/restablecer-contrasena" className="text-sm text-emerald-400 hover:text-emerald-300 underline">
                   ¿Olvidaste tu contraseña?
                 </Link>
               </div>
@@ -149,7 +149,7 @@ export function LoginPage() {
                 disabled={loading}
                 aria-busy={loading}
                 aria-disabled={loading}
-                className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
+                className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
               >
                 {loading ? (
                   <span className="flex items-center justify-center">
@@ -161,9 +161,9 @@ export function LoginPage() {
               </button>
             </form>
 
-            <p className="mt-4 text-sm text-slate-400 text-center">
+            <p className="mt-4 text-sm text-zinc-400 text-center">
               ¿No tienes cuenta?{' '}
-              <Link to="/registro" className="text-green-400 hover:text-green-300 underline">
+              <Link to="/registro" className="text-emerald-400 hover:text-emerald-300 underline">
                 Regístrate
               </Link>
             </p>
@@ -172,16 +172,16 @@ export function LoginPage() {
 
         {/* ── Right: info card ── */}
         <div className="w-full lg:flex-1 animate-fade-up-delay">
-          <div className="bg-slate-800/70 border border-green-500/25 rounded-2xl p-7 lg:p-9">
+          <div className="bg-zinc-900/70 border border-emerald-500/20 rounded-2xl p-7 lg:p-9">
 
             <div className="flex items-center gap-3 mb-2">
-              <Trophy size={24} className="text-green-400 shrink-0" strokeWidth={1.5} aria-hidden="true" />
+              <Trophy size={24} className="text-emerald-400 shrink-0" strokeWidth={1.5} aria-hidden="true" />
               <h2 className="text-xl font-bold text-white">Tu quiniela del Mundial 2026</h2>
             </div>
 
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+            <p className="text-zinc-300 text-sm leading-relaxed mb-6">
               Bienvenido a la competencia más épica de tu grupo.{' '}
-              <span className="text-green-400 font-medium">Predice, apuesta y demuestra</span>{' '}
+              <span className="text-emerald-400 font-medium">Predice, apuesta y demuestra</span>{' '}
               que sabes más de fútbol que nadie — todo en un solo lugar, gratis y en español.
             </p>
 
@@ -190,24 +190,24 @@ export function LoginPage() {
                 <li key={title} className="flex gap-4">
                   <Icon
                     size={22}
-                    className="text-green-400 shrink-0 mt-0.5"
+                    className="text-emerald-400 shrink-0 mt-0.5"
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="text-slate-100 font-semibold text-sm mb-0.5">{title}</p>
-                    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+                    <p className="text-zinc-100 font-semibold text-sm mb-0.5">{title}</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
 
-            <div className="border-t border-slate-700 pt-5 flex gap-3">
-              <Info size={16} className="text-slate-500 shrink-0 mt-0.5" strokeWidth={1.5} aria-hidden="true" />
-              <p className="text-slate-400 text-xs leading-relaxed">
-                <span className="text-slate-300">El admin reparte fichas al inicio de la competencia.</span>{' '}
+            <div className="border-t border-zinc-700 pt-5 flex gap-3">
+              <Info size={16} className="text-zinc-500 shrink-0 mt-0.5" strokeWidth={1.5} aria-hidden="true" />
+              <p className="text-zinc-400 text-xs leading-relaxed">
+                <span className="text-zinc-300">El admin reparte fichas al inicio de la competencia.</span>{' '}
                 Adminístralas bien — son tu munición para todo el torneo.{' '}
-                <span className="text-green-400 font-medium">¡Que empiece el Mundial!</span>
+                <span className="text-emerald-400 font-medium">¡Que empiece el Mundial!</span>
               </p>
             </div>
 

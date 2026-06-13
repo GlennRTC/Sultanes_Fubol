@@ -126,9 +126,9 @@ export function RegistroPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center px-4">
-      <div className="bg-slate-800 border border-slate-700 rounded-xl p-8 w-full max-w-[400px]">
-        <h1 className="text-xl font-bold text-slate-100 mb-6">Crear cuenta</h1>
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+      <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-8 w-full max-w-[400px]">
+        <h1 className="text-xl font-bold text-zinc-100 mb-6">Crear cuenta</h1>
 
         {/* Form-level error banner */}
         {error && (
@@ -143,7 +143,7 @@ export function RegistroPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Username (D-05) */}
           <div>
-            <label htmlFor="username" className="block text-sm text-slate-300 mb-1">
+            <label htmlFor="username" className="block text-sm text-zinc-300 mb-1">
               Nombre de usuario
             </label>
             <input
@@ -155,11 +155,11 @@ export function RegistroPage() {
                 setUsernameError('');
               }}
               required
-              className={`w-full bg-slate-700 border rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 ${
-                usernameError ? 'border-red-500' : 'border-slate-600'
+              className={`w-full bg-zinc-800 border rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 ${
+                usernameError ? 'border-red-500' : 'border-zinc-700'
               }`}
             />
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs text-zinc-400">
               Solo letras, números y guión bajo. No se puede cambiar.
             </p>
             {usernameError && (
@@ -169,7 +169,7 @@ export function RegistroPage() {
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm text-slate-300 mb-1">
+            <label htmlFor="email" className="block text-sm text-zinc-300 mb-1">
               Correo electrónico
             </label>
             <input
@@ -178,13 +178,13 @@ export function RegistroPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
             />
           </div>
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm text-slate-300 mb-1">
+            <label htmlFor="password" className="block text-sm text-zinc-300 mb-1">
               Contraseña
             </label>
             <input
@@ -196,8 +196,8 @@ export function RegistroPage() {
                 setPasswordError('');
               }}
               required
-              className={`w-full bg-slate-700 border rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 ${
-                passwordError ? 'border-red-500' : 'border-slate-600'
+              className={`w-full bg-zinc-800 border rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 ${
+                passwordError ? 'border-red-500' : 'border-zinc-700'
               }`}
             />
             {passwordError && (
@@ -211,7 +211,7 @@ export function RegistroPage() {
             disabled={loading}
             aria-busy={loading}
             aria-disabled={loading}
-            className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
+            className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -224,9 +224,9 @@ export function RegistroPage() {
         </form>
 
         {/* Crosslink to /login (D-03) */}
-        <p className="mt-4 text-sm text-slate-400 text-center">
+        <p className="mt-4 text-sm text-zinc-400 text-center">
           ¿Ya tienes cuenta?{' '}
-          <Link to="/login" className="text-green-400 hover:text-green-300 underline">
+          <Link to="/login" className="text-emerald-400 hover:text-emerald-300 underline">
             Ingresa
           </Link>
         </p>
