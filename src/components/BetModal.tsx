@@ -88,26 +88,26 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
         role="dialog"
         aria-modal="true"
         aria-labelledby={headingId}
-        className="relative bg-slate-800 border border-slate-700 rounded-xl p-6 w-full max-w-[480px] mx-auto"
+        className="relative bg-zinc-900 border border-zinc-700 rounded-xl p-6 w-full max-w-[480px] mx-auto"
       >
         {/* Close button — × is Unicode U+00D7, not ASCII X */}
         <button
           type="button"
           onClick={onClose}
           aria-label="Cerrar"
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl leading-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 text-xl leading-none min-h-[44px] min-w-[44px] flex items-center justify-center"
         >
           ×
         </button>
 
         {/* Modal header */}
-        <h2 id={headingId} className="text-xl font-bold text-slate-100 mb-1 pr-10">
+        <h2 id={headingId} className="text-xl font-bold text-zinc-100 mb-1 pr-10">
           {pool.question}
         </h2>
 
         {/* Deadline (open pools) */}
         {isOpen && (
-          <p className="text-sm text-slate-400 mb-4">
+          <p className="text-sm text-zinc-400 mb-4">
             Cierra:{' '}
             {formatInTimeZone(new Date(pool.deadline), tz, "d 'de' MMMM · HH:mm zzz", {
               locale: es,
@@ -131,30 +131,30 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                   key={option.id}
                   className={
                     option.id === userBet.option_id
-                      ? 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-green-500 text-sm text-slate-100 font-bold min-h-[44px]'
-                      : 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-sm text-slate-300 min-h-[44px]'
+                      ? 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-emerald-500 text-sm text-zinc-100 font-bold min-h-[44px]'
+                      : 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-zinc-700 text-sm text-zinc-300 min-h-[44px]'
                   }
                 >
                   {option.label}
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-400 mt-2 mb-4">
+            <p className="text-sm text-zinc-400 mt-2 mb-4">
               Apostaste: {userBet.tokens_wagered} fichas
             </p>
             {pool.status === 'resolved' && userBet.tokens_won !== null && userBet.tokens_won > 0 && (
-              <p className="text-sm text-green-400 font-bold mb-4">
+              <p className="text-sm text-emerald-400 font-bold mb-4">
                 Ganaste: +{userBet.tokens_won} fichas
               </p>
             )}
             {pool.status === 'resolved' &&
               (userBet.tokens_won === null || userBet.tokens_won === 0) && (
-                <p className="text-sm text-slate-500 mb-4">Perdiste</p>
+                <p className="text-sm text-zinc-500 mb-4">Perdiste</p>
               )}
             <button
               type="button"
               onClick={onClose}
-              className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+              className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
             >
               Cerrar
             </button>
@@ -164,7 +164,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
         {/* MODE B — Closed/resolved, no bet placed */}
         {!userBet && pool.status !== 'open' && (
           <>
-            <p className="text-sm text-slate-400 mb-4">Esta apuesta ya no acepta fichas.</p>
+            <p className="text-sm text-zinc-400 mb-4">Esta apuesta ya no acepta fichas.</p>
             {pool.status === 'resolved' && (
               <div className="flex flex-col gap-2 mb-4">
                 {sortedOptions.map((option) => {
@@ -174,8 +174,8 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                       key={option.id}
                       className={
                         isWinning
-                          ? 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-green-500 text-sm text-green-400 font-bold min-h-[44px]'
-                          : 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-sm text-slate-300 min-h-[44px]'
+                          ? 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-emerald-500 text-sm text-emerald-400 font-bold min-h-[44px]'
+                          : 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-zinc-700 text-sm text-zinc-300 min-h-[44px]'
                       }
                     >
                       {option.label}
@@ -187,7 +187,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
             <button
               type="button"
               onClick={onClose}
-              className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+              className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
             >
               Cerrar
             </button>
@@ -211,12 +211,12 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                         onClick={() => setSelectedOptionId(option.id)}
                         className={
                           selectedOptionId === option.id
-                            ? 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-green-500 text-sm text-slate-100 font-bold min-h-[44px] transition-colors'
-                            : 'w-full text-left px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-sm text-slate-300 hover:border-slate-500 min-h-[44px] transition-colors'
+                            ? 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-emerald-500 text-sm text-zinc-100 font-bold min-h-[44px] transition-colors'
+                            : 'w-full text-left px-4 py-3 rounded-lg bg-zinc-800 border border-zinc-700 text-sm text-zinc-300 hover:border-zinc-500 min-h-[44px] transition-colors'
                         }
                       >
                         <span>{option.label}</span>
-                        <span className="text-xs text-slate-400 ml-2">
+                        <span className="text-xs text-zinc-400 ml-2">
                           {odds !== null ? `(actual: ${odds}%)` : '(actual: —)'}
                         </span>
                       </button>
@@ -226,7 +226,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
 
                 {/* Token amount input */}
                 <div className="flex flex-col mb-4">
-                  <label htmlFor="bet-amount" className="text-sm text-slate-300 mb-1">
+                  <label htmlFor="bet-amount" className="text-sm text-zinc-300 mb-1">
                     ¿Cuántas fichas apuestas?
                   </label>
                   <input
@@ -237,9 +237,9 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                     step="1"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-24 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                    className="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                   />
-                  <p className="text-xs text-slate-400 mt-1">Mín. 10 fichas</p>
+                  <p className="text-xs text-zinc-400 mt-1">Mín. 10 fichas</p>
                 </div>
 
                 {/* CTA button */}
@@ -247,7 +247,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                   type="button"
                   disabled={!canProceed}
                   onClick={() => setStep('confirm')}
-                  className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
+                  className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
                 >
                   Confirmar apuesta
                 </button>
@@ -257,11 +257,11 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
             {/* STEP CONFIRM */}
             {step === 'confirm' && (
               <>
-                <p className="text-base text-slate-100 mb-2">
+                <p className="text-base text-zinc-100 mb-2">
                   {pool.pool_options?.find((o) => o.id === selectedOptionId)?.label ?? ''} ·{' '}
                   {amountNum} fichas
                 </p>
-                <p className="text-sm text-slate-400 mb-4">
+                <p className="text-sm text-zinc-400 mb-4">
                   ¿Estás seguro? Esta apuesta no se puede cambiar. Se descontarán {amountNum}{' '}
                   fichas.
                 </p>
@@ -271,7 +271,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                   aria-busy={loading}
                   aria-disabled={loading}
                   onClick={handleConfirm}
-                  className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg mb-2"
+                  className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg mb-2"
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -284,7 +284,7 @@ export function BetModal({ pool, userBet, betTotals, onClose, onSuccess }: BetMo
                 <button
                   type="button"
                   onClick={() => setStep('input')}
-                  className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+                  className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
                 >
                   Cancelar
                 </button>

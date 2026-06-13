@@ -15,7 +15,7 @@ export function AdminRoute() {
   if (!profile?.is_admin) return <Navigate to="/calendario" replace />;
   return (
     <>
-      <nav className="bg-slate-800 border-b border-slate-700">
+      <nav className="bg-zinc-900 border-b border-zinc-700">
         <div className="max-w-4xl mx-auto px-4 flex gap-1 overflow-x-auto">
           {adminTabs.map(tab => (
             <NavLink
@@ -24,8 +24,8 @@ export function AdminRoute() {
               className={({ isActive }) =>
                 `shrink-0 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                   isActive
-                    ? 'border-green-400 text-green-400'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'border-emerald-400 text-emerald-400'
+                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
                 }`
               }
             >

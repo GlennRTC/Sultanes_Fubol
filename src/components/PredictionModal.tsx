@@ -89,23 +89,23 @@ export function PredictionModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={headingId}
-        className="relative bg-slate-800 border border-slate-700 rounded-xl p-6 w-full max-w-[480px] mx-auto"
+        className="relative bg-zinc-900 border border-zinc-700 rounded-xl p-6 w-full max-w-[480px] mx-auto"
       >
         {/* Close button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl leading-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 text-xl leading-none min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Cerrar"
         >
           ×
         </button>
 
         {/* Modal header */}
-        <h2 id={headingId} className="text-xl font-bold text-slate-100 mb-1 pr-10">
+        <h2 id={headingId} className="text-xl font-bold text-zinc-100 mb-1 pr-10">
           {match.home_team} vs {match.away_team}
         </h2>
-        <p className="text-sm text-slate-400 mb-4">{displayDateTime}</p>
+        <p className="text-sm text-zinc-400 mb-4">{displayDateTime}</p>
 
         {/* Error banner */}
         {error && (
@@ -119,7 +119,7 @@ export function PredictionModal({
           <>
             <div className="flex items-center gap-4 mb-4">
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="home-score-readonly" className="text-sm text-slate-300">
+                <label htmlFor="home-score-readonly" className="text-sm text-zinc-300">
                   Goles {match.home_team}
                 </label>
                 <input
@@ -131,12 +131,12 @@ export function PredictionModal({
                   disabled
                   aria-disabled="true"
                   readOnly
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 opacity-50 cursor-not-allowed"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 opacity-50 cursor-not-allowed"
                 />
               </div>
-              <span className="text-base text-slate-400">–</span>
+              <span className="text-base text-zinc-400">–</span>
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="away-score-readonly" className="text-sm text-slate-300">
+                <label htmlFor="away-score-readonly" className="text-sm text-zinc-300">
                   Goles {match.away_team}
                 </label>
                 <input
@@ -148,14 +148,14 @@ export function PredictionModal({
                   disabled
                   aria-disabled="true"
                   readOnly
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 opacity-50 cursor-not-allowed"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 opacity-50 cursor-not-allowed"
                 />
               </div>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+              className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
             >
               Cerrar
             </button>
@@ -165,12 +165,12 @@ export function PredictionModal({
         {/* Render mode (b): locked match, no prediction */}
         {!existingPrediction && isLocked && (
           <>
-            <p className="text-sm text-slate-400 mb-4">
+            <p className="text-sm text-zinc-400 mb-4">
               Este partido ya comenzó — no se aceptan predicciones.
             </p>
             <div className="flex items-center gap-4 mb-4 opacity-50">
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="home-score-locked" className="text-sm text-slate-300">
+                <label htmlFor="home-score-locked" className="text-sm text-zinc-300">
                   Goles {match.home_team}
                 </label>
                 <input
@@ -182,12 +182,12 @@ export function PredictionModal({
                   disabled
                   aria-disabled="true"
                   readOnly
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 cursor-not-allowed"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 cursor-not-allowed"
                 />
               </div>
-              <span className="text-base text-slate-400">–</span>
+              <span className="text-base text-zinc-400">–</span>
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="away-score-locked" className="text-sm text-slate-300">
+                <label htmlFor="away-score-locked" className="text-sm text-zinc-300">
                   Goles {match.away_team}
                 </label>
                 <input
@@ -199,14 +199,14 @@ export function PredictionModal({
                   disabled
                   aria-disabled="true"
                   readOnly
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 cursor-not-allowed"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 cursor-not-allowed"
                 />
               </div>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+              className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
             >
               Cerrar
             </button>
@@ -218,7 +218,7 @@ export function PredictionModal({
           <>
             <div className="flex items-center gap-4 mb-4">
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="home-score" className="text-sm text-slate-300">
+                <label htmlFor="home-score" className="text-sm text-zinc-300">
                   Goles {match.home_team}
                 </label>
                 <input
@@ -228,12 +228,12 @@ export function PredictionModal({
                   max="99"
                   value={homeScore}
                   onChange={(e) => setHomeScore(e.target.value)}
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
-              <span className="text-base text-slate-400">–</span>
+              <span className="text-base text-zinc-400">–</span>
               <div className="flex flex-col items-center gap-1">
-                <label htmlFor="away-score" className="text-sm text-slate-300">
+                <label htmlFor="away-score" className="text-sm text-zinc-300">
                   Goles {match.away_team}
                 </label>
                 <input
@@ -243,11 +243,11 @@ export function PredictionModal({
                   max="99"
                   value={awayScore}
                   onChange={(e) => setAwayScore(e.target.value)}
-                  className="w-16 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-center text-base text-slate-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                  className="w-16 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-center text-base text-zinc-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
             </div>
-            <p className="text-sm text-slate-400 mb-4">Costo: 20 fichas</p>
+            <p className="text-sm text-zinc-400 mb-4">Costo: 20 fichas</p>
             <button
               type="button"
               disabled={homeScore === '' || awayScore === ''}
@@ -264,7 +264,7 @@ export function PredictionModal({
                 }
                 setStep('confirm');
               }}
-              className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
+              className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg"
             >
               Confirmar predicción
             </button>
@@ -274,10 +274,10 @@ export function PredictionModal({
         {/* Render mode (c): editable two-step — confirm step */}
         {!existingPrediction && !isLocked && step === 'confirm' && (
           <>
-            <p className="text-base text-slate-100 mb-2">
+            <p className="text-base text-zinc-100 mb-2">
               {match.home_team} <strong>{homeScore}</strong> – <strong>{awayScore}</strong> {match.away_team}
             </p>
-            <p className="text-sm text-slate-400 mb-4">
+            <p className="text-sm text-zinc-400 mb-4">
               ¿Estás seguro? Esta predicción no se puede cambiar. Se descontarán 20 fichas.
             </p>
             <button
@@ -286,7 +286,7 @@ export function PredictionModal({
               aria-busy={loading}
               aria-disabled={loading}
               onClick={handleConfirm}
-              className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg mb-2"
+              className="w-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-base px-6 py-3 rounded-lg mb-2"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -299,7 +299,7 @@ export function PredictionModal({
             <button
               type="button"
               onClick={() => setStep('input')}
-              className="text-sm text-slate-400 hover:text-slate-300 underline text-center block w-full"
+              className="text-sm text-zinc-400 hover:text-zinc-300 underline text-center block w-full"
             >
               Cancelar
             </button>

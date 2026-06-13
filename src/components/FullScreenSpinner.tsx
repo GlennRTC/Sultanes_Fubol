@@ -2,11 +2,11 @@
 export function FullScreenSpinner() {
   return (
     <div
-      className="min-h-screen w-full bg-slate-900 flex items-center justify-center"
+      className="min-h-screen w-full bg-zinc-950 flex items-center justify-center"
       role="status"
       aria-label="Cargando…"
     >
-      <div className="w-10 h-10 rounded-full border-4 border-green-500 border-t-transparent animate-spin" />
+      <div className="w-10 h-10 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
     </div>
   );
 }

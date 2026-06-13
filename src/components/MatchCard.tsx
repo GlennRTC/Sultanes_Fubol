@@ -21,9 +21,9 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
   const awayCode = getCountryCode(match.away_team);
 
   const statusBadge = {
-    scheduled: { label: 'Programado', className: 'text-slate-400 bg-slate-700' },
-    live:      { label: 'En vivo',    className: 'text-green-400 bg-green-900/50' },
-    finished:  { label: 'Finalizado', className: 'text-slate-500 bg-slate-800 border border-slate-700' },
+    scheduled: { label: 'Programado', className: 'text-zinc-400 bg-zinc-800' },
+    live:      { label: 'En vivo',    className: 'text-emerald-400 bg-emerald-950/80' },
+    finished:  { label: 'Finalizado', className: 'text-zinc-500 bg-zinc-900 border border-zinc-700' },
   }[match.status];
 
   return (
@@ -32,7 +32,7 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
       tabIndex={0}
       onClick={() => onCardClick(match)}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onCardClick(match); }}
-      className="bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 mb-2 cursor-pointer hover:border-slate-500 transition-colors"
+      className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 mb-2 cursor-pointer hover:border-zinc-500 transition-colors"
     >
       {/* Matchup row: home | score/vs | away — 3-column grid */}
       <div className="grid grid-cols-[1fr_68px_1fr] items-center gap-2 mb-2">
@@ -44,7 +44,7 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
               aria-hidden="true"
             />
           )}
-          <span className="font-bold text-slate-100 text-sm leading-tight truncate">
+          <span className="font-bold text-zinc-100 text-sm leading-tight truncate">
             {match.home_team}
           </span>
         </div>
@@ -52,11 +52,11 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
         {/* Score or vs */}
         <div className="flex items-center justify-center">
           {match.status === 'finished' ? (
-            <span className="text-base font-bold text-slate-100 tabular-nums tracking-tight">
+            <span className="text-base font-bold text-zinc-100 tabular-nums tracking-tight">
               {match.home_score}–{match.away_score}
             </span>
           ) : (
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+            <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">
               vs
             </span>
           )}
@@ -64,7 +64,7 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
 
         {/* Away team */}
         <div className="flex items-center justify-start gap-1.5 min-w-0">
-          <span className="font-bold text-slate-100 text-sm leading-tight truncate">
+          <span className="font-bold text-zinc-100 text-sm leading-tight truncate">
             {match.away_team}
           </span>
           {awayCode && (
@@ -78,14 +78,14 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
 
       {/* Meta row: time · status badge · prediction badge */}
       <div className="flex items-center justify-center gap-2 flex-wrap">
-        <span className="text-xs text-slate-400">{displayTime}</span>
+        <span className="text-xs text-zinc-400">{displayTime}</span>
         <span
           className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusBadge.className}`}
         >
           {statusBadge.label}
         </span>
         {prediction && (
-          <span className="inline-flex items-center bg-slate-700 rounded-full px-2 py-0.5 text-xs text-green-400">
+          <span className="inline-flex items-center bg-zinc-800 rounded-full px-2 py-0.5 text-xs text-emerald-400">
             {prediction.home_score_prediction}–{prediction.away_score_prediction}
           </span>
         )}
@@ -94,8 +94,8 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
       {/* Venue row — only when populated */}
       {match.venue && (
         <div className="flex items-center justify-center gap-1 mt-1.5">
-          <MapPin size={11} strokeWidth={1.5} className="text-slate-500 shrink-0" aria-hidden="true" />
-          <span className="text-xs text-slate-500 truncate">{match.venue}</span>
+          <MapPin size={11} strokeWidth={1.5} className="text-zinc-500 shrink-0" aria-hidden="true" />
+          <span className="text-xs text-zinc-500 truncate">{match.venue}</span>
         </div>
       )}
     </div>

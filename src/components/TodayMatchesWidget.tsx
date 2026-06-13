@@ -88,14 +88,14 @@ export function TodayMatchesWidget({ timezone }: { timezone: string }) {
     <div className="mb-4">
       {/* Header bar — always visible, toggles collapse */}
       <div
-        className="flex items-center justify-between px-3 py-2 bg-slate-800 rounded-t-lg border border-slate-700 cursor-pointer"
+        className="flex items-center justify-between px-3 py-2 bg-zinc-900 rounded-t-lg border border-zinc-700 cursor-pointer"
         onClick={handleToggle}
         role="button"
         aria-expanded={open}
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleToggle(); }}
       >
-        <span className="text-sm font-bold text-slate-100">Partidos de hoy</span>
+        <span className="text-sm font-bold text-zinc-100">Partidos de hoy</span>
         {/* Chevron rotates 180deg when expanded */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,7 @@ export function TodayMatchesWidget({ timezone }: { timezone: string }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`text-zinc-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           aria-hidden="true"
         >
           <polyline points="6 9 12 15 18 9" />
@@ -116,43 +116,43 @@ export function TodayMatchesWidget({ timezone }: { timezone: string }) {
 
       {/* Collapsible body */}
       {open && (
-        <div className="border-x border-b border-slate-700 rounded-b-lg overflow-hidden">
+        <div className="border-x border-b border-zinc-700 rounded-b-lg overflow-hidden">
           {loading ? (
             /* Loading skeleton */
-            <div className="h-24 bg-slate-800 rounded-b-lg animate-pulse border-t border-slate-700" />
+            <div className="h-24 bg-zinc-900 rounded-b-lg animate-pulse border-t border-zinc-700" />
           ) : (
             <div className="flex gap-3 overflow-x-auto px-3 py-3">
               {matches.map((match) => (
                 <div
                   key={match.id}
-                  className="shrink-0 w-40 bg-slate-700 rounded-lg px-3 py-3 flex flex-col gap-1"
+                  className="shrink-0 w-40 bg-zinc-800 rounded-lg px-3 py-3 flex flex-col gap-1"
                 >
                   {/* Status badge */}
                   {match.status === 'live' && (
-                    <span className="text-green-400 font-bold text-xs">🟢 EN VIVO</span>
+                    <span className="text-emerald-400 font-bold text-xs">🟢 EN VIVO</span>
                   )}
                   {match.status === 'finished' && (
-                    <span className="text-slate-400 text-xs">✅ FINALIZADO</span>
+                    <span className="text-zinc-400 text-xs">✅ FINALIZADO</span>
                   )}
                   {match.status === 'scheduled' && (
-                    <span className="text-slate-400 text-xs">⏰ {formatMatchTime(match)}</span>
+                    <span className="text-zinc-400 text-xs">⏰ {formatMatchTime(match)}</span>
                   )}
 
                   {/* Home team */}
-                  <p className="text-slate-100 text-sm font-medium truncate">{match.home_team}</p>
+                  <p className="text-zinc-100 text-sm font-medium truncate">{match.home_team}</p>
 
                   {/* Score row — only for live or finished */}
                   {match.status === 'live' && (
-                    <p className="text-slate-300 font-mono text-sm">? – ?</p>
+                    <p className="text-zinc-300 font-mono text-sm">? – ?</p>
                   )}
                   {match.status === 'finished' && (
-                    <p className="text-slate-100 font-bold font-mono text-sm">
+                    <p className="text-zinc-100 font-bold font-mono text-sm">
                       {match.home_score} – {match.away_score}
                     </p>
                   )}
 
                   {/* Away team */}
-                  <p className="text-slate-100 text-sm font-medium truncate">{match.away_team}</p>
+                  <p className="text-zinc-100 text-sm font-medium truncate">{match.away_team}</p>
                 </div>
               ))}
             </div>
