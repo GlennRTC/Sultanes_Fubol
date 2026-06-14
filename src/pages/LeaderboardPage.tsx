@@ -77,14 +77,24 @@ export function LeaderboardPage() {
               {/* Data rows */}
               {entries.map((entry, index) => {
                 const isOwnRow = user?.id === entry.id;
+                const isFirst = index === 0;
+                const isLast = entries.length > 1 && index === entries.length - 1;
                 return (
                   <div
                     key={entry.id}
-                    className={`flex items-center px-4 py-3 text-base text-zinc-100 border-b border-zinc-700 last:border-b-0 hover:bg-zinc-800/30 ${
-                      isOwnRow ? 'bg-zinc-800/50' : ''
+                    className={`flex items-center px-4 py-3 text-base text-zinc-100 border-b border-zinc-700 last:border-b-0 transition-colors ${
+                      isFirst ? 'row-fire' : isLast ? 'row-ice' : isOwnRow ? 'bg-zinc-800/50' : 'hover:bg-zinc-800/30'
                     }`}
                   >
-                    <span className="w-8 text-sm text-zinc-400">{index + 1}</span>
+                    <span className="w-8 text-sm">
+                      {isFirst ? (
+                        <span className="rank-flame" aria-label="1er lugar">🔥</span>
+                      ) : isLast ? (
+                        <span className="rank-ice" aria-label="último lugar">❄️</span>
+                      ) : (
+                        <span className="text-zinc-400">{index + 1}</span>
+                      )}
+                    </span>
                     <span className="flex-1 text-zinc-100">{entry.username}</span>
                     <span className="w-20 text-right text-zinc-100 font-bold">
                       {entry.leaderboard_points}

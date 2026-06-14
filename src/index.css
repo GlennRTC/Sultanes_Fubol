@@ -3,7 +3,52 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-900 text-slate-100;
+  @apply bg-zinc-950 text-zinc-100;
+}
+
+/* ── Leaderboard rank animations ─────────────────────────────────────── */
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1)    rotate(-3deg); opacity: 1;    }
+  20%       { transform: scale(1.15) rotate( 3deg); opacity: 0.9;  }
+  40%       { transform: scale(0.95) rotate(-2deg); opacity: 1;    }
+  60%       { transform: scale(1.1)  rotate( 2deg); opacity: 0.85; }
+  80%       { transform: scale(1.05) rotate(-1deg); opacity: 0.95; }
+}
+
+@keyframes freeze-spin {
+  0%   { transform: rotate(  0deg) scale(1);    opacity: 0.9; }
+  33%  { transform: rotate( 20deg) scale(1.1);  opacity: 1;   }
+  66%  { transform: rotate(-15deg) scale(0.95); opacity: 0.8; }
+  100% { transform: rotate(  0deg) scale(1);    opacity: 0.9; }
+}
+
+@keyframes fire-row-glow {
+  0%, 100% { box-shadow: inset 0 0 0 0 transparent; background-color: rgba(234, 88, 12, 0.06); }
+  50%       { box-shadow: inset 0 0 30px 0 rgba(251, 146, 60, 0.10); background-color: rgba(234, 88, 12, 0.12); }
+}
+
+@keyframes ice-row-glow {
+  0%, 100% { box-shadow: inset 0 0 0 0 transparent; background-color: rgba(59, 130, 246, 0.05); }
+  50%       { box-shadow: inset 0 0 30px 0 rgba(147, 197, 253, 0.12); background-color: rgba(59, 130, 246, 0.10); }
+}
+
+.rank-flame {
+  display: inline-block;
+  animation: flicker 0.75s ease-in-out infinite;
+}
+
+.rank-ice {
+  display: inline-block;
+  animation: freeze-spin 2.4s ease-in-out infinite;
+}
+
+.row-fire {
+  animation: fire-row-glow 2s ease-in-out infinite;
+}
+
+.row-ice {
+  animation: ice-row-glow 3s ease-in-out infinite;
 }
 
 /* Captain Tsubasa brand glow — applied to the hero title on the login page */
