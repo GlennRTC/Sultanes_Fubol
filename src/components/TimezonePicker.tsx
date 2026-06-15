@@ -6,6 +6,7 @@ export const SUPPORTED_TIMEZONES = [
   { label: 'México (Centro)',     iana: 'America/Mexico_City' },
   { label: 'México (Pacífico)',   iana: 'America/Mazatlan' },
   { label: 'México (Cancún)',     iana: 'America/Cancun' },
+  { label: 'Guatemala',           iana: 'America/Guatemala' },
   { label: 'Colombia',            iana: 'America/Bogota' },
   { label: 'Perú',                iana: 'America/Lima' },
   { label: 'Ecuador',             iana: 'America/Guayaquil' },

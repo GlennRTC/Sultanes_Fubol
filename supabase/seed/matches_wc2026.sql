@@ -20,7 +20,7 @@ values
   ('Costa de Marfil',     'Ecuador',                'E', '2026-06-14 23:00:00+00', 'scheduled'),
   ('Suecia',              'Túnez',                  'F', '2026-06-15 02:00:00+00', 'scheduled'),
   ('España',              'Cabo Verde',             'H', '2026-06-15 17:00:00+00', 'scheduled'),
-  ('Bélgica',             'Egipto',                 'G', '2026-06-15 22:00:00+00', 'scheduled'),
+  ('Bélgica',             'Egipto',                 'G', '2026-06-15 19:00:00+00', 'scheduled'),
   ('Arabia Saudita',      'Uruguay',                'H', '2026-06-15 22:00:00+00', 'scheduled'),
   ('Irán',                'Nueva Zelanda',          'G', '2026-06-16 04:00:00+00', 'scheduled'),
   -- ============================================================
