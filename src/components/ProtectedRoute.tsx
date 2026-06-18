@@ -9,12 +9,18 @@ import { FullScreenSpinner } from './FullScreenSpinner';
 // - If blocked: redirects to /login (WR-02: is_blocked must be enforced on the frontend)
 // - If authenticated and not blocked: renders children via <Outlet />
 export function ProtectedRoute() {
-  const { user, profile, loading, signOut } = useAuthStore();
+  const { user, profile, loading, profileLoading, signOut } = useAuthStore();
   const location = useLocation();
 
+  // Phase 1: auth session resolving (clears almost instantly from localStorage)
   if (loading) return <FullScreenSpinner />;
   if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
-  if (user && !profile) {
+
+  // Phase 2: profile row fetch in-flight (separate from auth — see App.tsx)
+  if (profileLoading) return <FullScreenSpinner />;
+
+  // Phase 3: profile missing after fetch completed — orphaned or signup race
+  if (!profile) {
     return (
       <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center gap-4 px-4">
         <p className="text-zinc-300 text-sm text-center max-w-xs">
@@ -29,6 +35,6 @@ export function ProtectedRoute() {
       </div>
     );
   }
-  if (profile?.is_blocked) return <Navigate to="/login" replace />;
+  if (profile.is_blocked) return <Navigate to="/login" replace />;
   return <Outlet />;
 }

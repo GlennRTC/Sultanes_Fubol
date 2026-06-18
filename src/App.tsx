@@ -18,46 +18,53 @@ import { AdminPoolsPage } from './pages/AdminPoolsPage';
 import { AdminReportsPage } from './pages/AdminReportsPage';
 
 export function App() {
-  const { setUser, setProfile, setLoading, loading } = useAuthStore();
+  const { setUser, setProfile, setLoading, setProfileLoading, loading } = useAuthStore();
 
-  // D-10: wire onAuthStateChange — populates Zustand store, fires on page load
+  // D-10: wire onAuthStateChange — populates Zustand store, fires on page load.
+  // Auth state (loading) clears immediately when session is known from localStorage.
+  // Profile fetch (profileLoading) is a separate async step so a slow/cold Supabase
+  // DB never hangs the whole app at the initial spinner.
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         if (session?.user) {
           setUser({ id: session.user.id, email: session.user.email ?? '' });
+          // Unblock the UI immediately — auth state is now known.
+          setLoading(false);
+
+          // Skip profile fetch if we already have it for this user (avoids double-fetch
+          // when onAuthStateChange fires INITIAL_SESSION then TOKEN_REFRESHED).
+          const { profile: current } = useAuthStore.getState();
+          if (current?.id === session.user.id) return;
+
+          setProfileLoading(true);
           const { data, error: profileError } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
-          if (profileError) {
-            if (profileError.code === 'PGRST116') {
-              // No profile row found — either the INSERT in RegistroPage hasn't run yet
-              // (race condition during signup) or the account is orphaned. Do NOT sign out:
-              // signing out would clear auth.uid() and cause the pending INSERT to fail,
-              // creating an account that can never log in. Set loading so the spinner clears;
-              // ProtectedRoute shows a friendly error for truly orphaned accounts.
-              setLoading(false);
-              return;
-            }
-            // Real error (network, RLS misconfiguration, etc.) — sign out to avoid a
-            // broken authenticated state.
+          setProfileLoading(false);
+
+          if (!profileError) {
+            setProfile(data);
+          } else if (profileError.code !== 'PGRST116') {
+            // Network / RLS error — do NOT sign out (could be a Supabase cold start).
+            // ProtectedRoute handles profile === null with a retry-friendly message.
             console.error('Profile fetch failed:', profileError.message);
-            await supabase.auth.signOut();
-            return;
           }
-          setProfile(data);
+          // PGRST116 = no profile row yet (signup race) — leave profile null,
+          // ProtectedRoute shows the orphaned-account message without signing out.
         } else {
           setUser(null);
           setProfile(null);
+          setProfileLoading(false);
+          setLoading(false);
         }
-        setLoading(false);
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [setUser, setProfile, setLoading]);
+  }, [setUser, setProfile, setLoading, setProfileLoading]);
 
   // D-10: show full-screen spinner while auth session resolves on page load
   if (loading) {
