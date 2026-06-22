@@ -283,6 +283,7 @@ export type Database = {
       admin_block_user: { Args: { p_target_user_id: string; p_blocked: boolean }; Returns: void; };
       admin_grant_tokens: { Args: { p_target_user_id: string; p_amount: number; p_note?: string }; Returns: void; };
       admin_set_match_result: { Args: { p_match_id: string; p_home_score: number; p_away_score: number }; Returns: void; };
+      admin_create_match: { Args: { p_home_team: string; p_away_team: string; p_group_name: string; p_match_datetime: string; p_venue?: string | null }; Returns: string; };
       create_bet_pool: { Args: { p_question: string; p_type: string; p_deadline: string; p_options: string[] }; Returns: string; };
       admin_resolve_pool: { Args: { p_pool_id: string; p_winning_option_id: string }; Returns: void; };
       get_leaderboard: { Args: Record<string, never>; Returns: { id: string; username: string; tokens: number; leaderboard_points: number }[]; };
