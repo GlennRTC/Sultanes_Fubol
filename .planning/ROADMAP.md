@@ -155,16 +155,20 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 **Depends on:** Phase 4
 
 **Wave 1**
+
 - [x] 05-01-PLAN.md — DB: migration 0009 (external_match_id column + Realtime publication) + types update
 
 **Wave 2** *(blocked on Wave 1)*
+
 - [x] 05-02-PLAN.md — [BLOCKING] Schema push: apply migration 0009 to live Supabase
 
 **Wave 3** *(blocked on Wave 2)*
+
 - [x] 05-03-PLAN.md — Edge Function sync-live-scores (football-data.org → DB)
 - [x] 05-04-PLAN.md — TodayMatchesWidget + CalendarPage integration
 
 **Wave 4** *(blocked on Wave 3)*
+
 - [x] 05-05-PLAN.md — Deploy + E2E verify checkpoint
 
 **UI hint:** yes
@@ -177,9 +181,11 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 **Plans:** 2/2 plans complete
 
 **Wave 1**
+
 - [x] 06-01-PLAN.md — Migrate all component files (Navbar, MatchCard, PredictionModal, PoolCard, BetModal, TodayMatchesWidget, FullScreenSpinner, ProtectedRoute, AdminRoute) from slate/green to zinc/emerald/amber
 
 **Wave 2** *(blocked on Wave 1)*
+
 - [x] 06-02-PLAN.md — Migrate all page files to zinc/emerald/amber, full app-wide palette consistency
 
 **UI hint:** yes
@@ -198,17 +204,20 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   5. admin_create_match enforces admin-only access and logs to admin_logs, consistent with every other admin RPC.
   6. tsc --noEmit passes. No regressions to existing prediction flow or group-stage match display.
 
-**Plans:** 4 plans
+**Plans:** 3/4 plans executed
 
 **Wave 1**
-- [ ] 07-01-PLAN.md — DB: migration 0010 (admin_create_match SECURITY DEFINER RPC) + types update
-- [ ] 07-02-PLAN.md — Frontend: live-glow keyframe + MatchCard highlight + CalendarPage finished-match accordion (both views)
+
+- [x] 07-01-PLAN.md — DB: migration 0010 (admin_create_match SECURITY DEFINER RPC) + types update
+- [x] 07-02-PLAN.md — Frontend: live-glow keyframe + MatchCard highlight + CalendarPage finished-match accordion (both views)
 
 **Wave 2** *(blocked on Wave 1)*
+
 - [ ] 07-03-PLAN.md — [BLOCKING] Schema push: apply migration 0010 to live Supabase + verify admin gating
 
 **Wave 3** *(blocked on Wave 2)*
-- [ ] 07-04-PLAN.md — AdminMatchesPage "Crear partido" form wired to admin_create_match
+
+- [x] 07-04-PLAN.md — AdminMatchesPage "Crear partido" form wired to admin_create_match
 
 **UI hint:** yes
 
@@ -222,4 +231,4 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | 4. Admin Panel + QA + Production | 5/5 | Complete   | 2026-06-11 |
 | 5. Live Match Widget | 5/5 | Complete | 2026-06-13 |
 | 6. Palette Redesign | 2/2 | Complete | 2026-06-13 |
-| 7. Match Status + Knockout Admin | 0/4 | Planned | - |
+| 7. Match Status + Knockout Admin | 3/4 | In Progress|  |
