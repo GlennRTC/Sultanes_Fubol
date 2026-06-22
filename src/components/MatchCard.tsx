@@ -32,7 +32,7 @@ export function MatchCard({ match, prediction, timezone, onCardClick }: MatchCar
       tabIndex={0}
       onClick={() => onCardClick(match)}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onCardClick(match); }}
-      className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 mb-2 cursor-pointer hover:border-zinc-500 transition-colors"
+      className={`bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 mb-2 cursor-pointer hover:border-zinc-500 transition-colors${match.status === 'live' ? ' live-glow border-emerald-500' : ''}`}
     >
       {/* Matchup row: home | score/vs | away — 3-column grid */}
       <div className="grid grid-cols-[1fr_68px_1fr] items-center gap-2 mb-2">
