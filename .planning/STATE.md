@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Phase 06 Plan 02 complete — full palette migration zinc/emerald/amber across all pages
-last_updated: "2026-06-13T00:28:00Z"
-last_activity: 2026-06-13 -- Phase 06 Plan 02 complete (10 pages + 3 extra files migrated to zinc/emerald/amber, zero grep matches)
+stopped_at: Phase 07 planned — 4 plans across 3 waves, ready for execution
+last_updated: "2026-06-22T00:00:00Z"
+last_activity: 2026-06-22 -- Phase 07 planned (match-status-knockout): migration 0010 + admin_create_match RPC, live-glow + finished-accordion frontend, blocking schema push, Crear partido admin form
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
-  total_plans: 23
+  total_plans: 27
   completed_plans: 20
-  percent: 87
+  percent: 74
 ---
 
 # FUBOL — Project State
@@ -21,16 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-04)
 
 **Core value:** A fully playable quinielas + apuestas experience live before the World Cup's first match kicks off on June 11, 2026.
-**Current focus:** Phase 03 — apuestas-bet-pools
+**Current focus:** Phase 07 — match-status-knockout
 
 ## Current Position
 
 Phase: 05 (live-match-widget) — COMPLETE
 Phase: 06 (palette-redesign) — COMPLETE (Plans 01 and 02 done)
-Next: All planned phases complete — app ready for launch
-Last activity: 2026-06-13 -- Phase 06 Plan 02 complete (10 pages + 3 extra files migrated, zero grep matches)
+Phase: 07 (match-status-knockout) — PLANNED (4 plans, 3 waves: 07-01+07-02 parallel, 07-03 blocking schema push, 07-04 admin form)
+Next: Execute Phase 07 — /gsd-execute-phase 07-match-status-knockout
+Last activity: 2026-06-22 -- Phase 07 planned: migration 0010 (admin_create_match RPC) + live-glow/finished-accordion frontend + blocking schema push + AdminMatchesPage Crear partido form
 
-Progress: [█████████░] 87%
+Progress: [█████████░] 74%
 
 ## Performance Metrics
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - Init: Ping Edge Function must be first deploy (prevents free-tier pause during dev + launch week)
 - Init: Seed SQL for group-stage matches unblocks calendar + quinielas on Day 1 without football-data.org API key
 - Init: All token mutations via SQL functions only — never from frontend
+- Phase 07: Knockout matchups entered only once both teams are confirmed — no placeholder/TBD card logic, no schema changes for "pending team" state
+- Phase 07: Penalty-shootout scoring unchanged — predictions scored on 90-minute regulation score only
 
 ### Pending Todos
 
@@ -86,6 +89,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-13
-Stopped at: Phase 06 Plan 02 complete — full palette migration zinc/emerald/amber across all pages and components
-Resume file: None (all phases complete)
+Last session: 2026-06-22
+Stopped at: Phase 07 (match-status-knockout) planned — 07-01-PLAN.md through 07-04-PLAN.md created, ROADMAP.md updated
+Resume file: .planning/phases/07-match-status-knockout/07-01-PLAN.md (Wave 1)
+</content>

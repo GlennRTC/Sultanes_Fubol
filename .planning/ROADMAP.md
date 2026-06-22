@@ -2,7 +2,7 @@
 
 ## Overview
 
-Four vertical slices deliver a fully playable quinielas + apuestas experience before the World Cup's first match on June 11, 2026. Phase 1 lays the Supabase + Netlify foundation and auth. Phase 2 adds the match calendar and quinielas predictions. Phase 3 delivers the full bet-pool economy. Phase 4 completes the admin panel and ships production-quality on mobile.
+Four vertical slices deliver a fully playable quinielas + apuestas experience before the World Cup's first match on June 11, 2026. Phase 1 lays the Supabase + Netlify foundation and auth. Phase 2 adds the match calendar and quinielas predictions. Phase 3 delivers the full bet-pool economy. Phase 4 completes the admin panel and ships production-quality on mobile. Post-launch phases (5-7) add live match data, a palette redesign, and knockout-stage admin support.
 
 ## Phases
 
@@ -10,6 +10,9 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 - [x] **Phase 2: Calendar + Quinielas** - Match calendar in local timezone, score predictions, live leaderboard (completed 2026-06-06)
 - [x] **Phase 3: Apuestas (Bet Pools)** - Token-based betting pools with live parimutuel odds and automatic payout (completed 2026-06-11)
 - [x] **Phase 4: Admin Panel + QA + Production** - Full admin panel, mobile QA, RLS audit, E2E smoke test (completed 2026-06-11)
+- [x] **Phase 5: Partidos del Día — Live Match Widget** - Live match status auto-updates via cron + Edge Function + Realtime (completed 2026-06-13)
+- [x] **Phase 6: Palette Redesign** - Full app migration to zinc/emerald/amber dark betting palette (completed 2026-06-13)
+- [ ] **Phase 7: Match Status Treatment + Knockout-Stage Admin Support** - Live match glow, finished-match accordion, admin match creation for knockout fixtures
 
 ## Phase Details
 
@@ -152,17 +155,62 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 **Depends on:** Phase 4
 
 **Wave 1**
-- [ ] 05-01-PLAN.md — DB: migration 0009 (external_match_id column + Realtime publication) + types update
+- [x] 05-01-PLAN.md — DB: migration 0009 (external_match_id column + Realtime publication) + types update
 
 **Wave 2** *(blocked on Wave 1)*
-- [ ] 05-02-PLAN.md — [BLOCKING] Schema push: apply migration 0009 to live Supabase
+- [x] 05-02-PLAN.md — [BLOCKING] Schema push: apply migration 0009 to live Supabase
 
 **Wave 3** *(blocked on Wave 2)*
-- [ ] 05-03-PLAN.md — Edge Function sync-live-scores (football-data.org → DB)
-- [ ] 05-04-PLAN.md — TodayMatchesWidget + CalendarPage integration
+- [x] 05-03-PLAN.md — Edge Function sync-live-scores (football-data.org → DB)
+- [x] 05-04-PLAN.md — TodayMatchesWidget + CalendarPage integration
 
 **Wave 4** *(blocked on Wave 3)*
-- [ ] 05-05-PLAN.md — Deploy + E2E verify checkpoint
+- [x] 05-05-PLAN.md — Deploy + E2E verify checkpoint
+
+**UI hint:** yes
+
+### Phase 6: Palette Redesign
+
+**Goal:** Migrate the entire app from the slate/green color palette to a zinc/emerald/amber dark betting-app palette, across all components and pages.
+**Mode:** execute
+**Depends on:** Phase 5
+**Plans:** 2/2 plans complete
+
+**Wave 1**
+- [x] 06-01-PLAN.md — Migrate all component files (Navbar, MatchCard, PredictionModal, PoolCard, BetModal, TodayMatchesWidget, FullScreenSpinner, ProtectedRoute, AdminRoute) from slate/green to zinc/emerald/amber
+
+**Wave 2** *(blocked on Wave 1)*
+- [x] 06-02-PLAN.md — Migrate all page files to zinc/emerald/amber, full app-wide palette consistency
+
+**UI hint:** yes
+
+### Phase 7: Match Status Treatment + Knockout-Stage Admin Support
+
+**Goal:** Live matches are visually highlighted with a pulsing glow on the calendar, finished matches collapse into a closed-by-default accordion per date/group, and admins can create new matches (including knockout-stage fixtures) through the UI instead of manual SQL.
+**Mode:** execute
+**Depends on:** Phase 4, Phase 5
+**Success Criteria** (what must be TRUE):
+
+  1. A live match's MatchCard shows a pulsing emerald glow/border, visually distinct from scheduled/finished cards.
+  2. Within each date group on /calendario (both "Por fecha" and "Por grupo" views), finished matches are collapsed under a closed-by-default toggle; live/scheduled matches remain directly visible.
+  3. Tapping a finished match inside the collapsed section still opens PredictionModal showing the prediction vs. final score.
+  4. An admin can create a new match (e.g. a Round of 16 fixture) via a form in the admin panel — no SQL required.
+  5. admin_create_match enforces admin-only access and logs to admin_logs, consistent with every other admin RPC.
+  6. tsc --noEmit passes. No regressions to existing prediction flow or group-stage match display.
+
+**Plans:** 4 plans
+
+**Wave 1**
+- [ ] 07-01-PLAN.md — DB: migration 0010 (admin_create_match SECURITY DEFINER RPC) + types update
+- [ ] 07-02-PLAN.md — Frontend: live-glow keyframe + MatchCard highlight + CalendarPage finished-match accordion (both views)
+
+**Wave 2** *(blocked on Wave 1)*
+- [ ] 07-03-PLAN.md — [BLOCKING] Schema push: apply migration 0010 to live Supabase + verify admin gating
+
+**Wave 3** *(blocked on Wave 2)*
+- [ ] 07-04-PLAN.md — AdminMatchesPage "Crear partido" form wired to admin_create_match
+
+**UI hint:** yes
 
 ## Progress
 
@@ -172,4 +220,6 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | 2. Calendar + Quinielas | 4/4 | Complete   | 2026-06-06 |
 | 3. Apuestas (Bet Pools) | 4/4 | Complete   | 2026-06-11 |
 | 4. Admin Panel + QA + Production | 5/5 | Complete   | 2026-06-11 |
-| 5. Live Match Widget | 0/5 | Planned | - |
+| 5. Live Match Widget | 5/5 | Complete | 2026-06-13 |
+| 6. Palette Redesign | 2/2 | Complete | 2026-06-13 |
+| 7. Match Status + Knockout Admin | 0/4 | Planned | - |
