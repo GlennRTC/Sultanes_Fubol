@@ -14,6 +14,14 @@ export function AdminMatchesPage() {
   const [scores, setScores] = useState<Record<string, { home: string; away: string }>>({});
   const [submitting, setSubmitting] = useState<string | null>(null);
 
+  // Create match form
+  const [homeTeam, setHomeTeam] = useState('');
+  const [awayTeam, setAwayTeam] = useState('');
+  const [groupLabel, setGroupLabel] = useState('');
+  const [matchDatetime, setMatchDatetime] = useState(''); // datetime-local string (local time)
+  const [venue, setVenue] = useState('');
+  const [creating, setCreating] = useState(false);
+
   const tz = localStorage.getItem('fubol_timezone') ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   useEffect(() => {
@@ -68,9 +76,66 @@ export function AdminMatchesPage() {
     setSubmitting(null);
   }
 
+  async function handleCreateMatch(e: React.FormEvent) {
+    e.preventDefault();
+    if (!homeTeam.trim() || !awayTeam.trim()) {
+      setError('Ingresa ambos equipos.');
+      return;
+    }
+    if (!groupLabel.trim()) {
+      setError('Ingresa el grupo o ronda.');
+      return;
+    }
+    if (!matchDatetime) {
+      setError('Ingresa la fecha y hora del partido.');
+      return;
+    }
+    // Convert datetime-local (local time) to UTC ISO string for the DB
+    const matchDatetimeUtc = new Date(matchDatetime).toISOString();
+    setCreating(true);
+    setError('');
+    setSuccess('');
+    const { data: newMatchId, error: rpcErr } = await supabase.rpc('admin_create_match', {
+      p_home_team: homeTeam.trim(),
+      p_away_team: awayTeam.trim(),
+      p_group_name: groupLabel.trim(),
+      p_match_datetime: matchDatetimeUtc,
+      p_venue: venue.trim() || null,
+    });
+    if (rpcErr) {
+      setError(
+        rpcErr.message === 'not_admin' ? 'No tienes permisos de administrador.' :
+        rpcErr.message === 'invalid_teams' ? 'Ingresa ambos equipos.' :
+        rpcErr.message === 'not_authenticated' ? 'Tu sesión expiró. Inicia sesión de nuevo.' :
+        'Error al crear partido. Intenta de nuevo.'
+      );
+    } else {
+      setSuccess('Partido creado correctamente.');
+      const newMatch: Match = {
+        id: newMatchId as string,
+        home_team: homeTeam.trim(),
+        away_team: awayTeam.trim(),
+        group_name: groupLabel.trim(),
+        match_datetime: matchDatetimeUtc,
+        status: 'scheduled',
+        home_score: null,
+        away_score: null,
+        venue: venue.trim() || null,
+      };
+      setMatches(prev => [newMatch, ...prev]);
+      setScores(prev => ({ ...prev, [newMatch.id]: { home: '', away: '' } }));
+      setHomeTeam('');
+      setAwayTeam('');
+      setGroupLabel('');
+      setMatchDatetime('');
+      setVenue('');
+    }
+    setCreating(false);
+  }
+
   return (
     <div className="min-h-[calc(100vh-56px)] bg-zinc-950 px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-bold text-zinc-100 mb-4">Resultados de Partidos</h1>
+      <h1 className="text-xl font-bold text-zinc-100 mb-4">Gestión de Partidos</h1>
 
       {error && (
         <div role="alert" className="bg-red-900/50 border border-red-700 rounded-lg px-4 py-3 mb-4">
@@ -82,6 +147,75 @@ export function AdminMatchesPage() {
           <p className="text-sm text-emerald-300">{success}</p>
         </div>
       )}
+
+      {/* SECTION 1 — Create Match */}
+      <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 mb-6">
+        <h2 className="text-base font-bold text-zinc-100 mb-4">Crear partido</h2>
+        <form onSubmit={handleCreateMatch} className="flex flex-col gap-3">
+          {/* Home team */}
+          <input
+            type="text"
+            placeholder="Equipo local"
+            value={homeTeam}
+            onChange={e => setHomeTeam(e.target.value)}
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
+          />
+
+          {/* Away team */}
+          <input
+            type="text"
+            placeholder="Equipo visitante"
+            value={awayTeam}
+            onChange={e => setAwayTeam(e.target.value)}
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
+          />
+
+          {/* Group/round label */}
+          <div>
+            <input
+              type="text"
+              placeholder="Grupo o ronda"
+              value={groupLabel}
+              onChange={e => setGroupLabel(e.target.value)}
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
+            />
+            <p className="text-xs text-zinc-500 mt-1">A–L para grupos, o R16/QF/SF/F para eliminatorias</p>
+          </div>
+
+          {/* Datetime */}
+          <div>
+            <label className="block text-xs text-zinc-400 mb-1">Fecha y hora</label>
+            <input
+              type="datetime-local"
+              value={matchDatetime}
+              onChange={e => setMatchDatetime(e.target.value)}
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
+            />
+            <p className="text-xs text-zinc-500 mt-1">Hora local. Se guardará en UTC.</p>
+          </div>
+
+          {/* Venue (optional) */}
+          <input
+            type="text"
+            placeholder="Sede (opcional)"
+            value={venue}
+            onChange={e => setVenue(e.target.value)}
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
+          />
+
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={creating}
+            className="min-h-[44px] w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-bold rounded-lg flex items-center justify-center gap-2"
+          >
+            {creating ? <Loader2 size={18} className="animate-spin" /> : 'Crear partido'}
+          </button>
+        </form>
+      </div>
+
+      {/* SECTION 2 — Pending Results */}
+      <h2 className="text-base font-bold text-zinc-100 mb-3">Resultados de Partidos</h2>
 
       {loading ? (
         <div className="flex items-center gap-2 text-zinc-400">
