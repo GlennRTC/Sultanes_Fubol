@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { toZonedTime, format } from 'date-fns-tz';
-import { format as dateFnsFormat } from 'date-fns';
-import { es } from 'date-fns/locale';
 import { supabase } from '../lib/supabase';
 import { MatchCard } from '../components/MatchCard';
+import { FinishedMatchRow } from '../components/FinishedMatchRow';
 import { PredictionModal } from '../components/PredictionModal';
 import { TimezonePicker, detectTimezone, saveTimezone, SUPPORTED_TIMEZONES } from '../components/TimezonePicker';
 import type { Match, Prediction } from '../types/index';
@@ -11,29 +9,6 @@ import { TodayMatchesWidget } from '../components/TodayMatchesWidget';
 
 // WC 2026 has 12 groups A–L (verified: RESEARCH.md critical count correction)
 const GROUPS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-
-// Group matches by LOCAL date key (Pitfall 2 — never substring the UTC string)
-function groupMatchesByLocalDate(matches: Match[], timezone: string): Map<string, Match[]> {
-  const map = new Map<string, Match[]>();
-  for (const match of matches) {
-    const zonedDate = toZonedTime(new Date(match.match_datetime), timezone);
-    const dateKey = format(zonedDate, 'yyyy-MM-dd', { timeZone: timezone });
-    const existing = map.get(dateKey);
-    if (existing) {
-      existing.push(match);
-    } else {
-      map.set(dateKey, [match]);
-    }
-  }
-  return map;
-}
-
-// Format a yyyy-MM-dd key as "12 de junio" in Spanish
-function formatDateHeader(dateKey: string): string {
-  const [year, month, day] = dateKey.split('-').map(Number);
-  const date = new Date(year, month - 1, day);
-  return dateFnsFormat(date, "d 'de' MMMM", { locale: es });
-}
 
 export function CalendarPage() {
   const [matches, setMatches] = useState<Match[]>([]);
@@ -50,18 +25,6 @@ export function CalendarPage() {
   const [activeGroup, setActiveGroup] = useState('A');
 
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
-
-  // Per-section "Partidos finalizados" accordion open state — local only (CONTEXT.md decision 2)
-  const [openFinished, setOpenFinished] = useState<Set<string>>(new Set());
-
-  function toggleFinished(key: string) {
-    setOpenFinished((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
-  }
 
   // Fetch matches and predictions in parallel on mount (ANTI-PATTERN: never fetch in child — always at page level)
   useEffect(() => {
@@ -227,7 +190,7 @@ export function CalendarPage() {
                 </select>
               </div>
 
-              {/* Date-grouped matches (Pitfall 2 — group by LOCAL date, not UTC string) */}
+              {/* Status-ordered feed: live -> scheduled -> finished (CONTEXT.md decision 1) */}
               {filteredMatches.length === 0 ? (
                 <div className="py-12 text-center">
                   <p className="text-zinc-100 font-bold mb-2">Sin partidos</p>
@@ -236,16 +199,17 @@ export function CalendarPage() {
                   </p>
                 </div>
               ) : (
-                Array.from(groupMatchesByLocalDate(filteredMatches, timezone)).map(([dateKey, dayMatches]) => {
-                  const liveOrScheduled = dayMatches.filter((m) => m.status !== 'finished');
-                  const finishedMatches = dayMatches.filter((m) => m.status === 'finished');
-                  const isOpen = openFinished.has(dateKey);
+                (() => {
+                  const live = filteredMatches.filter((m) => m.status === 'live');
+                  const scheduled = filteredMatches
+                    .filter((m) => m.status === 'scheduled')
+                    .sort((a, b) => new Date(a.match_datetime).getTime() - new Date(b.match_datetime).getTime());
+                  const finished = filteredMatches
+                    .filter((m) => m.status === 'finished')
+                    .sort((a, b) => new Date(b.match_datetime).getTime() - new Date(a.match_datetime).getTime());
                   return (
-                    <div key={dateKey}>
-                      <h2 className="text-sm font-bold text-zinc-300 mt-6 mb-2 uppercase tracking-wide">
-                        {formatDateHeader(dateKey)}
-                      </h2>
-                      {liveOrScheduled.map((m) => (
+                    <>
+                      {live.map((m) => (
                         <MatchCard
                           key={m.id}
                           match={m}
@@ -254,33 +218,22 @@ export function CalendarPage() {
                           onCardClick={setSelectedMatch}
                         />
                       ))}
-                      {finishedMatches.length > 0 && (
+                      {scheduled.map((m) => (
+                        <MatchCard
+                          key={m.id}
+                          match={m}
+                          prediction={getPredictionForMatch(m.id)}
+                          timezone={timezone}
+                          onCardClick={setSelectedMatch}
+                        />
+                      ))}
+                      {finished.length > 0 && (
                         <>
-                          <button
-                            type="button"
-                            onClick={() => toggleFinished(dateKey)}
-                            aria-expanded={isOpen}
-                            className="w-full flex items-center justify-between px-3 py-1.5 mb-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-zinc-400 hover:text-zinc-100"
-                          >
-                            <span>Partidos finalizados ({finishedMatches.length})</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className={`text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                              aria-hidden="true"
-                            >
-                              <polyline points="6 9 12 15 18 9" />
-                            </svg>
-                          </button>
-                          {isOpen && finishedMatches.map((m) => (
-                            <MatchCard
+                          <p className="text-xs font-bold text-zinc-500 uppercase tracking-wide mt-4 mb-2">
+                            Finalizados
+                          </p>
+                          {finished.map((m) => (
+                            <FinishedMatchRow
                               key={m.id}
                               match={m}
                               prediction={getPredictionForMatch(m.id)}
@@ -290,9 +243,9 @@ export function CalendarPage() {
                           ))}
                         </>
                       )}
-                    </div>
+                    </>
                   );
-                })
+                })()
               )}
             </>
           )}
@@ -318,16 +271,19 @@ export function CalendarPage() {
                 ))}
               </div>
 
-              {/* Active group's matches */}
+              {/* Active group's matches — same live -> scheduled -> finished split as Por fecha */}
               {(() => {
                 const groupMatches = matches.filter((m) => m.group_name === activeGroup);
-                const liveOrScheduled = groupMatches.filter((m) => m.status !== 'finished');
-                const finishedMatches = groupMatches.filter((m) => m.status === 'finished');
-                const groupKey = `group-${activeGroup}`;
-                const isOpen = openFinished.has(groupKey);
+                const live = groupMatches.filter((m) => m.status === 'live');
+                const scheduled = groupMatches
+                  .filter((m) => m.status === 'scheduled')
+                  .sort((a, b) => new Date(a.match_datetime).getTime() - new Date(b.match_datetime).getTime());
+                const finished = groupMatches
+                  .filter((m) => m.status === 'finished')
+                  .sort((a, b) => new Date(b.match_datetime).getTime() - new Date(a.match_datetime).getTime());
                 return (
                   <>
-                    {liveOrScheduled.map((m) => (
+                    {live.map((m) => (
                       <MatchCard
                         key={m.id}
                         match={m}
@@ -336,33 +292,22 @@ export function CalendarPage() {
                         onCardClick={setSelectedMatch}
                       />
                     ))}
-                    {finishedMatches.length > 0 && (
+                    {scheduled.map((m) => (
+                      <MatchCard
+                        key={m.id}
+                        match={m}
+                        prediction={getPredictionForMatch(m.id)}
+                        timezone={timezone}
+                        onCardClick={setSelectedMatch}
+                      />
+                    ))}
+                    {finished.length > 0 && (
                       <>
-                        <button
-                          type="button"
-                          onClick={() => toggleFinished(groupKey)}
-                          aria-expanded={isOpen}
-                          className="w-full flex items-center justify-between px-3 py-1.5 mb-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-zinc-400 hover:text-zinc-100"
-                        >
-                          <span>Partidos finalizados ({finishedMatches.length})</span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className={`text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                            aria-hidden="true"
-                          >
-                            <polyline points="6 9 12 15 18 9" />
-                          </svg>
-                        </button>
-                        {isOpen && finishedMatches.map((m) => (
-                          <MatchCard
+                        <p className="text-xs font-bold text-zinc-500 uppercase tracking-wide mt-4 mb-2">
+                          Finalizados
+                        </p>
+                        {finished.map((m) => (
+                          <FinishedMatchRow
                             key={m.id}
                             match={m}
                             prediction={getPredictionForMatch(m.id)}
