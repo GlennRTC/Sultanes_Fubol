@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-04)
 Phase: 05 (live-match-widget) — COMPLETE
 Phase: 06 (palette-redesign) — COMPLETE (Plans 01 and 02 done)
 Phase: 07 (match-status-knockout) — Plans 01, 02, 04 done. Feature-complete pending final manual verification.
-Next: Final smoke-test verification for Phase 07, then close phase
+Next: Phase 08 (match-feed-redesign) -- execute 08-01-PLAN.md (FinishedMatchRow + status-ordered feed). Phase 07 final smoke-test verification still pending separately.
 Last activity: 2026-06-22 -- Phase 07 Plan 04 executed: Crear partido form added to AdminMatchesPage.tsx, calling admin_create_match RPC
 
 Progress: [█████████░] 85%

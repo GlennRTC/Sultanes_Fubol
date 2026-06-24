@@ -2,7 +2,7 @@
 
 ## Overview
 
-Four vertical slices deliver a fully playable quinielas + apuestas experience before the World Cup's first match on June 11, 2026. Phase 1 lays the Supabase + Netlify foundation and auth. Phase 2 adds the match calendar and quinielas predictions. Phase 3 delivers the full bet-pool economy. Phase 4 completes the admin panel and ships production-quality on mobile. Post-launch phases (5-7) add live match data, a palette redesign, and knockout-stage admin support.
+Four vertical slices deliver a fully playable quinielas + apuestas experience before the World Cup's first match on June 11, 2026. Phase 1 lays the Supabase + Netlify foundation and auth. Phase 2 adds the match calendar and quinielas predictions. Phase 3 delivers the full bet-pool economy. Phase 4 completes the admin panel and ships production-quality on mobile. Post-launch phases (5-8) add live match data, a palette redesign, knockout-stage admin support, and a live-first match feed redesign.
 
 ## Phases
 
@@ -13,6 +13,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 - [x] **Phase 5: Partidos del Día — Live Match Widget** - Live match status auto-updates via cron + Edge Function + Realtime (completed 2026-06-13)
 - [x] **Phase 6: Palette Redesign** - Full app migration to zinc/emerald/amber dark betting palette (completed 2026-06-13)
 - [ ] **Phase 7: Match Status Treatment + Knockout-Stage Admin Support** - Live match glow, finished-match accordion, admin match creation for knockout fixtures
+- [ ] **Phase 8: Match Feed Redesign** - Live-first status-ordered feed with compact always-visible finished-match rows, replacing the date-grouped accordion
 
 ## Phase Details
 
@@ -221,6 +222,30 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **UI hint:** yes
 
+### Phase 8: Match Feed Redesign
+
+**Goal:** Replace the date-grouped match list on /calendario with a status-ordered feed -- live matches first (large cards, existing glow), scheduled matches next (chronological), finished matches always-visible in a compact single-line row at the bottom. Applies to both "Por fecha" and "Por grupo" views.
+**Mode:** execute
+**Depends on:** Phase 7
+**Success Criteria** (what must be TRUE):
+
+  1. On /calendario, live matches render at the top in their existing full-size glowing cards.
+  2. Scheduled matches render next, in chronological order, in their existing full-size cards.
+  3. Finished matches render at the bottom, always visible (no toggle/accordion), in a new compact single-line row format.
+  4. Tapping any finished match row still opens PredictionModal showing the prediction vs. final score, identical behavior to before.
+  5. The same live -> scheduled -> finished ordering applies inside the "Por grupo" view's active group.
+  6. The Grupo/Equipo filter bar still works -- filtering happens before the status split.
+  7. The Phase 7 "Partidos finalizados" toggle/accordion code is fully removed (no dead code left behind).
+  8. tsc --noEmit passes. No regressions to the prediction submission flow.
+
+**Plans:** 1 plan
+
+**Wave 1**
+
+- [ ] 08-01-PLAN.md -- FinishedMatchRow component + CalendarPage status-ordered feed (both views) + Phase 7 accordion removal
+
+**UI hint:** yes
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -232,3 +257,4 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 | 5. Live Match Widget | 5/5 | Complete | 2026-06-13 |
 | 6. Palette Redesign | 2/2 | Complete | 2026-06-13 |
 | 7. Match Status + Knockout Admin | 3/4 | In Progress|  |
+| 8. Match Feed Redesign | 0/1 | Not Started |  |
