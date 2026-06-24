@@ -13,7 +13,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 - [x] **Phase 5: Partidos del Día — Live Match Widget** - Live match status auto-updates via cron + Edge Function + Realtime (completed 2026-06-13)
 - [x] **Phase 6: Palette Redesign** - Full app migration to zinc/emerald/amber dark betting palette (completed 2026-06-13)
 - [ ] **Phase 7: Match Status Treatment + Knockout-Stage Admin Support** - Live match glow, finished-match accordion, admin match creation for knockout fixtures
-- [ ] **Phase 8: Match Feed Redesign** - Live-first status-ordered feed with compact always-visible finished-match rows, replacing the date-grouped accordion
+- [x] **Phase 8: Match Feed Redesign** - Live-first status-ordered feed with compact always-visible finished-match rows, replacing the date-grouped accordion (completed 2026-06-24)
 
 ## Phase Details
 
@@ -205,7 +205,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   5. admin_create_match enforces admin-only access and logs to admin_logs, consistent with every other admin RPC.
   6. tsc --noEmit passes. No regressions to existing prediction flow or group-stage match display.
 
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans executed
 
 **Wave 1**
 
@@ -214,7 +214,7 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
 
 **Wave 2** *(blocked on Wave 1)*
 
-- [ ] 07-03-PLAN.md — [BLOCKING] Schema push: apply migration 0010 to live Supabase + verify admin gating
+- [x] 07-03-PLAN.md — [BLOCKING] Schema push: apply migration 0010 to live Supabase + verify admin gating
 
 **Wave 3** *(blocked on Wave 2)*
 
@@ -238,11 +238,11 @@ Four vertical slices deliver a fully playable quinielas + apuestas experience be
   7. The Phase 7 "Partidos finalizados" toggle/accordion code is fully removed (no dead code left behind).
   8. tsc --noEmit passes. No regressions to the prediction submission flow.
 
-**Plans:** 1 plan
+**Plans:** 1/1 plans executed
 
 **Wave 1**
 
-- [ ] 08-01-PLAN.md -- FinishedMatchRow component + CalendarPage status-ordered feed (both views) + Phase 7 accordion removal
+- [x] 08-01-PLAN.md -- FinishedMatchRow component + CalendarPage status-ordered feed (both views) + Phase 7 accordion removal
 
 **UI hint:** yes
 

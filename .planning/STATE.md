@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Phase 07 Plan 04 (admin create-match form) complete — Phase 07 feature-complete pending final verification
-last_updated: "2026-06-22T20:51:15.418Z"
-last_activity: "2026-06-22 -- Phase 07 Plan 04 executed: Crear partido form added to AdminMatchesPage.tsx, calling admin_create_match RPC"
+stopped_at: Phase 08 Plan 01 (live-first status feed + FinishedMatchRow) complete
+last_updated: "2026-06-24T19:00:00.000Z"
+last_activity: "2026-06-24 -- Phase 08 Plan 01 executed: status-ordered feed (live -> scheduled -> finished) replacing date-grouped accordion in CalendarPage.tsx, new FinishedMatchRow.tsx component"
 progress:
-  total_phases: 7
-  completed_phases: 4
-  total_plans: 27
-  completed_plans: 23
-  percent: 85
+  total_phases: 8
+  completed_phases: 5
+  total_plans: 29
+  completed_plans: 25
+  percent: 86
 ---
 
 # FUBOL — Project State
@@ -21,17 +21,18 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-04)
 
 **Core value:** A fully playable quinielas + apuestas experience live before the World Cup's first match kicks off on June 11, 2026.
-**Current focus:** Phase 07 — match-status-knockout
+**Current focus:** Phase 08 — match-feed-redesign
 
 ## Current Position
 
 Phase: 05 (live-match-widget) — COMPLETE
 Phase: 06 (palette-redesign) — COMPLETE (Plans 01 and 02 done)
 Phase: 07 (match-status-knockout) — Plans 01, 02, 04 done. Feature-complete pending final manual verification.
-Next: Phase 08 (match-feed-redesign) -- execute 08-01-PLAN.md (FinishedMatchRow + status-ordered feed). Phase 07 final smoke-test verification still pending separately.
-Last activity: 2026-06-22 -- Phase 07 Plan 04 executed: Crear partido form added to AdminMatchesPage.tsx, calling admin_create_match RPC
+Phase: 08 (match-feed-redesign) — Plan 01 done (live-first status feed + compact FinishedMatchRow).
+Next: Phase 07 final smoke-test verification still pending separately; no further plans queued for Phase 08 unless additional polish is requested.
+Last activity: 2026-06-24 -- Phase 08 Plan 01 executed: status-ordered feed (live -> scheduled -> finished) replacing date-grouped accordion in CalendarPage.tsx, new FinishedMatchRow.tsx component
 
-Progress: [█████████░] 85%
+Progress: [██████████] 86%
 
 ## Performance Metrics
 
@@ -61,6 +62,7 @@ Progress: [█████████░] 85%
 | Phase 07-match-status-knockout P02 | 720 | 2 tasks | 3 files |
 | Phase 07-match-status-knockout P01 | 720 | 2 tasks | 2 files |
 | Phase 07-match-status-knockout P04 | 720 | 1 task | 1 file |
+| Phase 08-match-feed-redesign P01 | 720 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -76,6 +78,7 @@ Recent decisions affecting current work:
 - Phase 07: Penalty-shootout scoring unchanged — predictions scored on 90-minute regulation score only
 - [Phase ?]: Phase 07-02: live-glow keyframe mirrors fire-row-glow/ice-row-glow pattern in emerald tones; finished-match accordion uses local useState, not localStorage
 - Phase 07-04: admin create-match form constructs an optimistic local Match object from form inputs + RPC-returned uuid, avoiding a refetch; mirrors AdminPoolsPage's datetime-local-to-UTC conversion and SECTION 1/2 layout pattern
+- Phase 08-01: Status (live -> scheduled -> finished) replaces date as the primary feed ordering mechanism; Phase 07's finished-match accordion (openFinished/toggleFinished) fully retired in favor of an always-visible compact FinishedMatchRow
 
 ### Pending Todos
 
@@ -94,7 +97,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-22T20:20:47Z
-Stopped at: Phase 07 Plan 04 (admin create-match form) complete — Phase 07 feature-complete pending final verification
+Last session: 2026-06-24T19:00:00Z
+Stopped at: Phase 08 Plan 01 (live-first status feed + FinishedMatchRow) complete
 Resume file: None
 </content>
