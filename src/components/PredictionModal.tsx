@@ -32,7 +32,7 @@ export function PredictionModal({
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const isLocked = match.status !== 'scheduled';
+  const isLocked = match.status !== 'scheduled' || new Date(match.match_datetime) <= new Date();
 
   // Close on Escape key (accessibility)
   useEffect(() => {
