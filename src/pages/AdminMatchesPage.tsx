@@ -5,6 +5,44 @@ import { es } from 'date-fns/locale';
 import { supabase } from '../lib/supabase';
 import type { Match } from '../types/index';
 
+const WC2026_TEAMS = [
+  'Alemania', 'Arabia Saudita', 'Argelia', 'Argentina', 'Australia', 'Austria',
+  'Bélgica', 'Bolivia', 'Bosnia y Herzegovina', 'Brasil',
+  'Cabo Verde', 'Canadá', 'Catar', 'Chequia', 'Chile', 'Colombia',
+  'Corea del Sur', 'Costa de Marfil', 'Croacia', 'Curazao',
+  'Ecuador', 'Egipto', 'Escocia', 'España', 'Estados Unidos',
+  'Francia', 'Ghana', 'Haití', 'Honduras',
+  'Inglaterra', 'Irak', 'Irán',
+  'Japón', 'Jordania',
+  'Marruecos', 'México',
+  'Nigeria', 'Noruega', 'Nueva Zelanda',
+  'Países Bajos', 'Panamá', 'Paraguay', 'Perú', 'Portugal',
+  'Rep. Dem. del Congo',
+  'Senegal', 'Sudáfrica', 'Suecia', 'Suiza',
+  'Túnez', 'Turquía',
+  'Uruguay', 'Uzbekistán',
+  'Venezuela',
+];
+
+const WC2026_VENUES = [
+  'Estadio Azteca — Ciudad de México, México',
+  'Estadio BBVA — Monterrey, México',
+  'Estadio Akron — Guadalajara, México',
+  'BC Place — Vancouver, Canadá',
+  'BMO Field — Toronto, Canadá',
+  'MetLife Stadium — Nueva York/Nueva Jersey, EE.UU.',
+  'SoFi Stadium — Los Ángeles, EE.UU.',
+  'AT&T Stadium — Dallas, EE.UU.',
+  'Levi\'s Stadium — Área de la Bahía, EE.UU.',
+  'Lumen Field — Seattle, EE.UU.',
+  'Gillette Stadium — Boston, EE.UU.',
+  'Hard Rock Stadium — Miami, EE.UU.',
+  'Mercedes-Benz Stadium — Atlanta, EE.UU.',
+  'Arrowhead Stadium — Kansas City, EE.UU.',
+  'Lincoln Financial Field — Filadelfia, EE.UU.',
+  'NRG Stadium — Houston, EE.UU.',
+];
+
 export function AdminMatchesPage() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
@@ -153,22 +191,28 @@ export function AdminMatchesPage() {
         <h2 className="text-base font-bold text-zinc-100 mb-4">Crear partido</h2>
         <form onSubmit={handleCreateMatch} className="flex flex-col gap-3">
           {/* Home team */}
-          <input
-            type="text"
-            placeholder="Equipo local"
+          <select
             value={homeTeam}
             onChange={e => setHomeTeam(e.target.value)}
             className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
-          />
+          >
+            <option value="">Equipo local…</option>
+            {WC2026_TEAMS.map(t => (
+              <option key={t} value={t} disabled={t === awayTeam}>{t}</option>
+            ))}
+          </select>
 
           {/* Away team */}
-          <input
-            type="text"
-            placeholder="Equipo visitante"
+          <select
             value={awayTeam}
             onChange={e => setAwayTeam(e.target.value)}
             className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
-          />
+          >
+            <option value="">Equipo visitante…</option>
+            {WC2026_TEAMS.map(t => (
+              <option key={t} value={t} disabled={t === homeTeam}>{t}</option>
+            ))}
+          </select>
 
           {/* Group/round label */}
           <div>
@@ -195,13 +239,16 @@ export function AdminMatchesPage() {
           </div>
 
           {/* Venue (optional) */}
-          <input
-            type="text"
-            placeholder="Sede (opcional)"
+          <select
             value={venue}
             onChange={e => setVenue(e.target.value)}
             className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 min-h-[44px] focus:outline-none focus:border-emerald-500"
-          />
+          >
+            <option value="">Sede (opcional)…</option>
+            {WC2026_VENUES.map(v => (
+              <option key={v} value={v}>{v}</option>
+            ))}
+          </select>
 
           {/* Submit */}
           <button
